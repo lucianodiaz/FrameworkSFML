@@ -116,14 +116,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\54264\Documents\SFML-2.5.1\include;$(ProjectDir)framework\include;$(ProjectDir)Game\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Dev\SFML-2.5.1\include;$(ProjectDir)framework\include;$(ProjectDir)Game\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\54264\Documents\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\Dev\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -149,14 +149,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="framework\include\ECS\Entity\Gameplay\Actor.cpp" />
+    <ClCompile Include="framework\source\ECS\Component\CTransform.cpp" />
+    <ClCompile Include="framework\source\ECS\Entity\EntityManager.cpp" />
     <ClCompile Include="Game\source\Configuration\Configuration.cpp" />
     <ClCompile Include="framework\source\Input\Action.cpp" />
     <ClCompile Include="Game\source\Game.cpp" />
     <ClCompile Include="Game\main.cpp" />
     <ClCompile Include="framework\source\Window\Window.cpp" />
+    <ClCompile Include="Game\source\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="framework\include\ECS\Component\CDrawable.h" />
+    <ClInclude Include="framework\include\ECS\Component\Component.h" />
+    <ClInclude Include="framework\include\ECS\Component\CShape.h" />
+    <ClInclude Include="framework\include\ECS\Component\CTransform.h" />
     <ClInclude Include="framework\include\ECS\Entity\Entity.h" />
+    <ClInclude Include="framework\include\ECS\Entity\EntityManager.h" />
+    <ClInclude Include="framework\include\ECS\Entity\Gameplay\Actor.h" />
+    <ClInclude Include="framework\include\ECS\System\System.h" />
     <ClInclude Include="Game\include\Configuration\Configuration.h" />
     <ClInclude Include="framework\include\Input\Action.h" />
     <ClInclude Include="framework\include\Input\ActionTarget.h" />
@@ -164,6 +175,7 @@
     <ClInclude Include="framework\include\ResourceManager.h" />
     <ClInclude Include="Game\include\Game.h" />
     <ClInclude Include="framework\include\Window\Window.h" />
+    <ClInclude Include="Game\include\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\Sprites\barrel.png" />
