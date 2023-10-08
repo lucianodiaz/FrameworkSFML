@@ -1,16 +1,25 @@
 #pragma once
 #include <string>
+#include <ECS/Component/CTransform.h>
+#include <ECS/Component/CShape.h>
+#include <ECS/Component/CDrawable.h>
 
+using std::string;
+
+template<typename ENTITY>
 class Entity
 {
-	std::string _tag{"default"};
-	bool _active;
-	size_t _id;
-	Entity(const std::string& tag, size_t id);
+protected:
+	template<typename> friend class EntityManager;
+
+	Entity(const string& tag, const size_t id) : _tag(tag), _id(id){}
+	string _tag{ "default" };
+	bool _alive = true;
+	size_t _id = 0;
 public:
-	
-	void destroy() { _active = false; };
-	bool isActive()const { return _active; }
-	const std::string& tag()const { return _tag; }
-	size_t id()const { return _id; }
+	void destroy() { _alive = false; };
+	bool isAlive()const { return _alive; }
+	const string& tag()const { return _tag; }
+	const size_t id()const { return _id; }
 };
+
