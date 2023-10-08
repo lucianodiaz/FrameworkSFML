@@ -74,8 +74,6 @@ void Game::createPlayer()
 	float x = _window->getRenderWindow().getSize().x / 2.0f;
 	float y = _window->getRenderWindow().getSize().y / 2.0f;
 
-	sf::Vector2f pos = sf::Vector2f(x, y);
-
-	_player->setPosition(pos);
+	_player->setPosition(x,y);
 	_player->setVelocity(1, 0);
 }
