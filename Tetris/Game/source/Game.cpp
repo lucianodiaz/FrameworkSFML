@@ -3,6 +3,7 @@
 Game::Game(int x, int y) :
 	_window(std::make_unique<Window>(x,y,"Tetris"))
 {
+	_entityManager = std::make_shared<EntityManager<Actor>>();
 }
 
 void Game::run(int frame_per_seconds)
@@ -13,8 +14,12 @@ void Game::run(int frame_per_seconds)
 
 	sf::Time TimerPerFrame = sf::seconds(1.f / frame_per_seconds);
 
+	createPlayer();
+
 	while (_window->isOpen())
 	{
+		//_entityManager->update(TimerPerFrame);
+
 		processEvents();
 		bool repaint = false;
 		timeSinceLastUpdate += clock.restart();
@@ -34,13 +39,14 @@ Game::~Game()
 
 void Game::update(sf::Time deltaTime)
 {
-
+	_entityManager->update(deltaTime);
 }
 
 void Game::draw()
 {
 	_window->clear();
 
+	_window->draw(_player->cDrawable->sprite);
 	_window->display();
 }
 
@@ -59,4 +65,17 @@ void Game::processEvents()
 			}
 		}
 	}
+}
+
+void Game::createPlayer()
+{
+	_player = _entityManager->addEntity<Player>("player");
+	_player->processEvent();
+	float x = _window->getRenderWindow().getSize().x / 2.0f;
+	float y = _window->getRenderWindow().getSize().y / 2.0f;
+
+	sf::Vector2f pos = sf::Vector2f(x, y);
+
+	_player->setPosition(pos);
+	_player->setVelocity(1, 0);
 }

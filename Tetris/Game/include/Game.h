@@ -2,7 +2,9 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include <Window/Window.h>
-
+#include <Player.h>
+#include <ECS/Entity/EntityManager.h>
+#include <ECS/Entity/Gameplay/Actor.h>
 
 class Game
 {
@@ -23,7 +25,12 @@ protected:
 
 	void processEvents();
 
+	void createPlayer();
 private:
 
 	std::unique_ptr<Window> _window;
+
+	std::shared_ptr<Player> _player;
+
+	std::shared_ptr<EntityManager<Actor>> _entityManager;
 };
