@@ -30,12 +30,6 @@
     <ClCompile Include="Game\source\Configuration\Configuration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="framework\source\ECS\Entity\EntityManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="framework\source\ECS\Component\CTransform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\source\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -150,8 +150,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="framework\include\ECS\Entity\Gameplay\Actor.cpp" />
-    <ClCompile Include="framework\source\ECS\Component\CTransform.cpp" />
-    <ClCompile Include="framework\source\ECS\Entity\EntityManager.cpp" />
     <ClCompile Include="Game\source\Configuration\Configuration.cpp" />
     <ClCompile Include="framework\source\Input\Action.cpp" />
     <ClCompile Include="Game\source\Game.cpp" />
