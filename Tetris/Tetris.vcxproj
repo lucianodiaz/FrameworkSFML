@@ -150,6 +150,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="framework\include\ECS\Entity\Gameplay\Actor.cpp" />
+    <ClCompile Include="framework\include\ECS\System\SystemRender.h" />
+    <ClCompile Include="framework\source\ECS\System\TransformSystem.cpp" />
     <ClCompile Include="Game\source\Configuration\Configuration.cpp" />
     <ClCompile Include="framework\source\Input\Action.cpp" />
     <ClCompile Include="Game\source\Game.cpp" />
@@ -166,6 +168,7 @@
     <ClInclude Include="framework\include\ECS\Entity\EntityManager.h" />
     <ClInclude Include="framework\include\ECS\Entity\Gameplay\Actor.h" />
     <ClInclude Include="framework\include\ECS\System\System.h" />
+    <ClInclude Include="framework\include\ECS\System\TransformSystem.h" />
     <ClInclude Include="Game\include\Configuration\Configuration.h" />
     <ClInclude Include="framework\include\Input\Action.h" />
     <ClInclude Include="framework\include\Input\ActionTarget.h" />

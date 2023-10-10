@@ -36,6 +36,12 @@
     <ClCompile Include="framework\include\ECS\Entity\Gameplay\Actor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="framework\source\ECS\System\TransformSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\include\ECS\System\SystemRender.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\include\Game.h">
@@ -84,6 +90,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="framework\include\ECS\Entity\Gameplay\Actor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\include\ECS\System\TransformSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
