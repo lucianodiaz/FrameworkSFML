@@ -1,8 +1,8 @@
 #pragma once
-
-class System
+#include <SFML/System/Time.hpp>
+class BaseSystem
 {
-	virtual ~System() = 0;
 public:
-	System();
+    virtual ~BaseSystem() = default;
+    virtual void update(sf::Time deltaTime) = 0;
 };
