@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 class CShape :
-	public Component
+	public Component<CShape>
 {
 public:
 	sf::CircleShape circle;

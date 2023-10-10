@@ -1,8 +1,14 @@
 #pragma once
 
-class Component
+class ComponentBase
 {
-
 public:
-	Component(){};
+    virtual ~ComponentBase() = default;
+};
+
+template<typename T>
+class Component : public ComponentBase
+{
+public:
+    Component() {}
 };

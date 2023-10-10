@@ -2,7 +2,7 @@
 #include <ECS/Component/Component.h>
 #include <SFML/System/Vector2.hpp>
 class CTransform :
-    public Component
+    public Component<CTransform>
 {
 public:
     sf::Vector2f position{};

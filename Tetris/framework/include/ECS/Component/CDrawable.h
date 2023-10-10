@@ -4,7 +4,7 @@
 #include <Configuration/Configuration.h>
 
 class CDrawable :
-	public Component
+	public Component<CDrawable>
 {
 	sf::Texture _texture;
 public:
