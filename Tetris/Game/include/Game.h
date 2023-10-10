@@ -5,6 +5,7 @@
 #include <Player.h>
 #include <ECS/Entity/EntityManager.h>
 #include <ECS/Entity/Gameplay/Actor.h>
+#include <ECS/System/TransformSystem.h>
 
 class Game
 {
@@ -33,4 +34,6 @@ private:
 	std::shared_ptr<Player> _player;
 
 	std::shared_ptr<EntityManager<Actor>> _entityManager;
+
+	std::vector<std::unique_ptr<BaseSystem>> _systems;
 };
