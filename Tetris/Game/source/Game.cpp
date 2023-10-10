@@ -1,7 +1,8 @@
 #include <Game.h>
+#include <ECS/System/SystemRender.h>
 
 Game::Game(int x, int y) :
-	_window(std::make_unique<Window>(x,y,"Tetris"))
+	_window(std::make_unique<Window>(x,y,"SFML Framework"))
 {
 	_entityManager = std::make_shared<EntityManager<Actor>>();
 }
@@ -16,10 +17,16 @@ void Game::run(int frame_per_seconds)
 
 	createPlayer();
 
+	std::unique_ptr<TransformSystem> _transformSystem = std::make_unique<TransformSystem>();
+	_transformSystem->setEntityManager(_entityManager);
+	_systems.push_back(std::move(_transformSystem));
+
+	std::unique_ptr<SystemRender> _renderSystem = std::make_unique<SystemRender>(_window->getRenderWindow());
+	_renderSystem->setEntityManager(_entityManager);
+	_systems.push_back(std::move(_renderSystem));
+
 	while (_window->isOpen())
 	{
-		//_entityManager->update(TimerPerFrame);
-
 		processEvents();
 		bool repaint = false;
 		timeSinceLastUpdate += clock.restart();
@@ -39,15 +46,17 @@ Game::~Game()
 
 void Game::update(sf::Time deltaTime)
 {
+	for (auto& s : _systems)
+	{
+		s->update(deltaTime);
+	}
 	_entityManager->update(deltaTime);
 }
 
 void Game::draw()
 {
-	_window->clear();
-
-	_window->draw(_player->cDrawable->sprite);
-	_window->display();
+	/*_window->clear();
+	_window->display();*/
 }
 
 void Game::processEvents()
@@ -65,15 +74,15 @@ void Game::processEvents()
 			}
 		}
 	}
+	_player->processEvent();
 }
 
 void Game::createPlayer()
 {
 	_player = _entityManager->addEntity<Player>("player");
-	_player->processEvent();
 	float x = _window->getRenderWindow().getSize().x / 2.0f;
 	float y = _window->getRenderWindow().getSize().y / 2.0f;
 
 	_player->setPosition(x,y);
-	_player->setVelocity(1, 0);
+	_player->setVelocity(100, 0);
 }
