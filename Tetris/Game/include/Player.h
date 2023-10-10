@@ -1,11 +1,11 @@
 #pragma once
 #include <memory>
 #include <ECS/Entity/Gameplay/Actor.h>
-#include <ECS/Component/CTransform.h>
-#include <ECS/Component/CShape.h>
+#include <ECS/Component/CDrawable.h>
+#include <Input/ActionTarget.h>
 
 class Player :
-	public Actor
+	public Actor, public ActionTarget<int>
 {
 public:
 
@@ -14,6 +14,5 @@ public:
 	virtual void update(sf::Time deltaTime);
 	virtual void beginPlay();
 	void processEvent();
-	std::shared_ptr <CDrawable> cDrawable;
 };
 
