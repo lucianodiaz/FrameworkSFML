@@ -1,5 +1,7 @@
 #pragma once
 #include <ECS/Entity/Entity.h>
+#include <ECS/Component/CTransform.h>
+#include <SFML/System/Time.hpp>
 
 class Actor : public Entity<Actor>
 {
@@ -12,32 +14,29 @@ public:
 	template<typename ... Args>
 	void setPosition(Args&& ... args);
 
-	virtual const sf::Vector2f& getPosition()const;
+	virtual sf::Vector2f& getPosition();
 
 
 	template<typename ... Args>
 	void setVelocity(Args&& ... args);
 
-	const sf::Vector2f& getVelocity()const;
-
-protected:
-	std::shared_ptr<CTransform> cTransform;
+    sf::Vector2f& getVelocity();
 };
 
 template<typename ...Args>
 inline void Actor::setPosition(Args && ...args)
 {
-	if (cTransform)
+	if (hasComponent<CTransform>())
 	{
-		cTransform->setPosition(std::forward<Args>(args)...);
+		getComponent<CTransform>()->setPosition(std::forward<Args>(args)...);
 	}
 }
 
 template<typename ...Args>
 inline void Actor::setVelocity(Args && ...args)
 {
-	if (cTransform)
+	if (hasComponent<CTransform>())
 	{
-		cTransform->setVelocity(std::forward<Args>(args)...);
+		getComponent<CTransform>()->setVelocity(std::forward<Args>(args)...);
 	}
 }
