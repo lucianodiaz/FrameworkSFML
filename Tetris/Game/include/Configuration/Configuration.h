@@ -22,7 +22,9 @@ public:
 
 	enum Textures :int
 	{
-		Barrel
+		Default,
+		Barrel,
+		Human,
 	};
 
 	static ResourceManager<sf::Texture> textures;

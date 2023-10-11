@@ -18,6 +18,8 @@ void Configuration::initialize()
 void Configuration::initTextures()
 {
 	textures.load(Textures::Barrel, "assets/Sprites/barrel.png");
+	textures.load(Textures::Default, "assets/Sprites/default.png");
+	textures.load(Textures::Human, "assets/Sprites/human.png");
 }
 
 void Configuration::initMusic()
