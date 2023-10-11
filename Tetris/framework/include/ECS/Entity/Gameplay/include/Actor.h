@@ -6,10 +6,11 @@
 class Actor : public Entity<Actor>
 {
 public:
-
 	Actor(const string& tag, const size_t id);
+	Actor(const string& tag, const size_t id, sf::Vector2f pos);
 	virtual void update(sf::Time deltaTime);
 	virtual void beginPlay();
+
 
 	template<typename ... Args>
 	void setPosition(Args&& ... args);
@@ -21,6 +22,9 @@ public:
 	void setVelocity(Args&& ... args);
 
     sf::Vector2f& getVelocity();
+
+
+	std::shared_ptr<CTransform> ComponentTransform;
 };
 
 template<typename ...Args>
