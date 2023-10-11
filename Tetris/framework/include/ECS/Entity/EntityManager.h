@@ -12,29 +12,29 @@ using std::vector;
 using std::string;
 using std::shared_ptr;
 using std::map;
+using std::list;
 
 template<typename T>
 class EntityManager
 {
-	vector<shared_ptr<T>> _toAdd;
-	vector<shared_ptr<T>> _entities;
-	map<string, vector<shared_ptr<T>>> _entityMap;
+	list<shared_ptr<T>> _entitiesToAdd;
+	list<shared_ptr<T>> _entities;
+	map<string, list<shared_ptr<T>>> _entityMap;
 	size_t _totalEntities = 0;
 public:
 	EntityManager(){};
 
 	void update(sf::Time deltaTime);
 
-	template<typename E>
+	template<typename E, typename... Args>
+	shared_ptr<E> addEntity(const string& tag,Args&& ... args);
 
-	shared_ptr<E> addEntity(const string& tag);
+	list<shared_ptr<T>>& getEntities();
 
-	vector<shared_ptr<T>>& getEntities();
-
-	vector<shared_ptr<T>>& getEntities(const string& tag);
+	list<shared_ptr<T>>& getEntities(const string& tag);
 
 	template<typename ...COMPONENT>
-	vector<shared_ptr<T>> getEntitiesWithComponent();
+	list<shared_ptr<T>> getEntitiesWithComponent();
 
 	
 };
@@ -43,13 +43,16 @@ public:
 template<typename T>
 inline void EntityManager<T>::update(sf::Time deltaTime)
 {
-	for (auto e : _toAdd)
+	if (_entitiesToAdd.size() > 0)
 	{
-		_entities.push_back(e);
-		_entityMap[e->tag()].push_back(e);
+		_entities.splice(_entities.end(), _entitiesToAdd);
 	}
 
-	_toAdd.clear();
+	_entitiesToAdd.clear();
+
+	_entities.remove_if([](const std::shared_ptr<T>& entity) {
+		return !entity->isAlive();
+		});
 
 	for (auto e : _entities)
 	{
@@ -58,36 +61,37 @@ inline void EntityManager<T>::update(sf::Time deltaTime)
 			e->update(deltaTime);
 		}
 	}
+
 }
 
 
 template<typename T>
-inline vector<shared_ptr<T>>& EntityManager<T>::getEntities()
+inline list<shared_ptr<T>>& EntityManager<T>::getEntities()
 {
 	return _entities;
 }
 
 
 template<typename T>
-inline vector<shared_ptr<T>>& EntityManager<T>::getEntities(const string& tag)
+inline list<shared_ptr<T>>& EntityManager<T>::getEntities(const string& tag)
 {
 	return _entityMap[tag];
 }
 
 template<typename T>
-template<typename E>
-inline shared_ptr<E> EntityManager<T>::addEntity(const string& tag)
+template<typename E, typename ...Args>
+inline shared_ptr<E> EntityManager<T>::addEntity(const string& tag, Args&& ...args)
 {
-	auto e = std::shared_ptr<E>(new E(tag, _totalEntities++));
-	_toAdd.push_back(e);
+	auto e = std::shared_ptr<E>(new E(tag, _totalEntities++, std::forward<Args>(args)...));
+	_entitiesToAdd.push_back(e);
 	return e;
 }
 
 template<typename T>
 template<typename ...COMPONENT>
-inline vector<shared_ptr<T>> EntityManager<T>::getEntitiesWithComponent()
+inline list<shared_ptr<T>> EntityManager<T>::getEntitiesWithComponent()
 {
-	vector<shared_ptr<T>> entitiesWithComponent;
+	list<shared_ptr<T>> entitiesWithComponent;
 
 	for (const auto& entity : _entities)
 	{
