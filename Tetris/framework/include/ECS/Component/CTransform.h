@@ -10,6 +10,7 @@ public:
     float angle = 0;
 
     CTransform(const sf::Vector2f& p, const sf::Vector2f& v, float a) : position(p), velocity(v), angle(a) {};
+    CTransform(const sf::Vector2f& p) : position(p) {};
     CTransform(){};
 
     void setPosition(const sf::Vector2f& pos) { position = pos; };

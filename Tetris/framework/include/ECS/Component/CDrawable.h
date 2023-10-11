@@ -14,5 +14,13 @@ public:
 	{
 		sprite.setTexture(_texture);
 		sprite.setOrigin(_texture.getSize().x / 2.f, _texture.getSize().y / 2.f);
+
+	}
+
+	CDrawable()
+	{
+		_texture = Configuration::textures.get(Configuration::Textures::Default);
+		sprite.setTexture(_texture);
+		sprite.setOrigin(_texture.getSize().x / 2.f, _texture.getSize().y / 2.f);
 	}
 };
