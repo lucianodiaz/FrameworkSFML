@@ -79,10 +79,8 @@ void Game::processEvents()
 
 void Game::createPlayer()
 {
-	_player = _entityManager->addEntity<Player>("player");
 	float x = _window->getRenderWindow().getSize().x / 2.0f;
 	float y = _window->getRenderWindow().getSize().y / 2.0f;
 
-	_player->setPosition(x,y);
-	_player->setVelocity(100, 0);
+	_player = _entityManager->addEntity<Player>("player",Configuration::Textures::Human,sf::Vector2f(x,y));
 }
