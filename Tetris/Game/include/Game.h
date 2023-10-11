@@ -4,7 +4,7 @@
 #include <Window/Window.h>
 #include <Player.h>
 #include <ECS/Entity/EntityManager.h>
-#include <ECS/Entity/Gameplay/include/Actor.h>
+#include <ECS/Entity/Gameplay/Actor.h>
 #include <ECS/System/TransformSystem.h>
 
 class Game
