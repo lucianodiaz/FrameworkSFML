@@ -1,18 +1,18 @@
 #pragma once
 #include <memory>
-#include <ECS/Entity/Gameplay/Actor.h>
-#include <ECS/Component/CDrawable.h>
 #include <Input/ActionTarget.h>
-
-class Player :
-	public Actor, public ActionTarget<int>
+#include <ECS/Entity/Gameplay/include/Character.h>
+class Player : public Character
 {
 public:
 
 	Player(const string& tag, const size_t id);
+	Player(const string& tag, const size_t id,Configuration::Textures tex_id ,sf::Vector2f pos);
+	Player(const string& tag, const size_t id,sf::Vector2f pos);
 
-	virtual void update(sf::Time deltaTime);
-	virtual void beginPlay();
-	void processEvent();
+	virtual void update(sf::Time deltaTime) override;
+	virtual void beginPlay() override;
+	virtual void processEvent() override;
+	virtual void setupInput() override;
 };
 
