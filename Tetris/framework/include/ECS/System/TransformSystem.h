@@ -3,7 +3,7 @@
 #include <ECS/Component/CTransform.h>
 #include <memory>
 #include <ECS/Entity/EntityManager.h>
-#include <ECS/Entity/Gameplay/Actor.h>
+#include <ECS/Entity/Gameplay/include/Actor.h>
 #include <iostream>
 class TransformSystem : public BaseSystem
 {

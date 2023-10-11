@@ -2,7 +2,7 @@
 #include "System.h"
 #include <ECS/Component/CDrawable.h>
 #include <ECS/Entity/EntityManager.h>
-#include <ECS/Entity/Gameplay/Actor.h>
+#include <ECS/Entity/Gameplay/include/Actor.h>
 #include <SFML/Graphics.hpp>
 
 class SystemRender : public BaseSystem
