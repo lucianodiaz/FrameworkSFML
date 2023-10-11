@@ -11,8 +11,16 @@
 #include <ECS/Component/Component.h>
 
 using std::string;
+
+class EntityBase
+{
+public:
+    virtual ~EntityBase() = default;
+};
+
+
 template<typename ENTITY>
-class Entity
+class Entity : public EntityBase
 {
 protected:
     template<typename> friend class EntityManager;
@@ -24,7 +32,7 @@ protected:
     std::unordered_map<string, std::shared_ptr<ComponentBase>> _components;
 
     template<typename COMPONENT, typename... Args>
-    void addComponent(Args&&... args);
+    std::shared_ptr<COMPONENT> addComponent(Args&&... args);
 
     template<typename COMPONENT>
     void removeComponent();
@@ -48,10 +56,13 @@ public:
 
 template<typename ENTITY>
 template<typename COMPONENT, typename ...Args>
-inline void Entity<ENTITY>::addComponent(Args&&... args)
+inline std::shared_ptr<COMPONENT> Entity<ENTITY>::addComponent(Args&&... args)
 {
     auto c = std::make_shared<COMPONENT>(std::forward<Args>(args)...);
+    c->setOwner(reinterpret_cast<EntityBase*>(this));
     _components[typeid(COMPONENT).name()] = c;
+   
+    return c;
 }
 
 template<typename ENTITY>
