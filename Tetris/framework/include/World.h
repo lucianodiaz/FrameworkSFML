@@ -1,0 +1,8 @@
+﻿
+
+class World
+{
+public:
+    World();
+    
+};
