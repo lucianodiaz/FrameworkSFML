@@ -35,3 +35,8 @@ void Character::setupInput()
 {
 	Pawn::setupInput();
 }
+
+void Character::handleCollision(Entity<Actor>& otherEntity)
+{
+	Pawn::handleCollision(otherEntity);
+}

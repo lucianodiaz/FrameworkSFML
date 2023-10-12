@@ -70,3 +70,12 @@ void Player::setupInput()
 
 		});
 }
+
+void Player::handleCollision(Entity<Actor>& otherEntity)
+{
+	Character::handleCollision(otherEntity);
+	if (otherEntity.tag() == "barrel")
+	{
+		otherEntity.destroy();
+	}
+}

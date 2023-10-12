@@ -18,6 +18,10 @@ void Actor::update(sf::Time deltaTime)
 
 void Actor::beginPlay()
 {
+	setOnBeginCollision([this](Entity<Actor>& otherEntity)
+		{
+			this->handleCollision(otherEntity);
+		});
 }
 
 sf::Vector2f& Actor::getPosition()
@@ -28,4 +32,8 @@ sf::Vector2f& Actor::getPosition()
 sf::Vector2f& Actor::getVelocity()
 {
 	return ComponentTransform->velocity;
+}
+
+void Actor::handleCollision(Entity<Actor>& otherEntity)
+{
 }

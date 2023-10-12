@@ -14,5 +14,7 @@ public:
 	virtual void beginPlay() override;
 	virtual void processEvent() override;
 	virtual void setupInput() override;
+
+	virtual void handleCollision(Entity<Actor>& otherEntity) override;
 };
 

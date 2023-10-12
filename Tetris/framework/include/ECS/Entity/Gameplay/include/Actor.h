@@ -25,22 +25,25 @@ public:
 
 
 	std::shared_ptr<CTransform> ComponentTransform;
+
+
+	virtual void handleCollision(Entity<Actor>& otherEntity) override;
 };
 
 template<typename ...Args>
 inline void Actor::setPosition(Args && ...args)
 {
-	if (hasComponent<CTransform>())
+	if (ComponentTransform)
 	{
-		getComponent<CTransform>()->setPosition(std::forward<Args>(args)...);
+		ComponentTransform->setPosition(std::forward<Args>(args)...);
 	}
 }
 
 template<typename ...Args>
 inline void Actor::setVelocity(Args && ...args)
 {
-	if (hasComponent<CTransform>())
+	if (ComponentTransform)
 	{
-		getComponent<CTransform>()->setVelocity(std::forward<Args>(args)...);
+		ComponentTransform->setVelocity(std::forward<Args>(args)...);
 	}
 }

@@ -23,8 +23,11 @@ template<typename ENTITY>
 class Entity : public EntityBase
 {
 protected:
+
     template<typename> friend class EntityManager;
-    Entity(const string& tag, const size_t id) : _tag(tag), _id(id) {}
+    Entity(const string& tag, const size_t id) : _tag(tag), _id(id) 
+    {
+    }
     string _tag{ "default" };
     bool _alive = true;
     size_t _id = 0;
@@ -37,13 +40,14 @@ protected:
     template<typename COMPONENT>
     void removeComponent();
 
+    using CollisionEventFunction = std::function<void(Entity<ENTITY>& other)>;
+
 public:
+
     void destroy() { _alive = false; };
     bool isAlive() const { return _alive; }
     const string& tag() const { return _tag; }
     const size_t id() const { return _id; }
-
-    
 
     template<typename COMPONENT>
     std::shared_ptr<COMPONENT> getComponent();
@@ -51,7 +55,14 @@ public:
     template<typename COMPONENT>
     bool hasComponent() const;
 
-   
+
+
+    void setOnBeginCollision(CollisionEventFunction eventCol);
+
+    virtual void handleCollision(Entity<ENTITY>& otherEntity);
+
+    CollisionEventFunction onBeginCollision;
+
 };
 
 template<typename ENTITY>
@@ -101,4 +112,15 @@ inline void Entity<ENTITY>::removeComponent()
     {
 		_components.erase(it);
 	}
+}
+
+template<typename ENTITY>
+inline void Entity<ENTITY>::setOnBeginCollision(CollisionEventFunction eventCol)
+{
+    onBeginCollision = eventCol;
+}
+
+template<typename ENTITY>
+inline void Entity<ENTITY>::handleCollision(Entity<ENTITY>& otherEntity)
+{
 }

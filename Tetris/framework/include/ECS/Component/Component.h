@@ -8,7 +8,7 @@ class ComponentBase
 {
 public:
     virtual ~ComponentBase() = default;
-    virtual EntityBase& getOwner() const const = 0;
+    virtual EntityBase& getOwner() const = 0;
     virtual void setOwner(EntityBase* e) = 0;
 };
 
