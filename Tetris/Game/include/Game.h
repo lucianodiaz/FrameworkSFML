@@ -12,7 +12,7 @@ class Game
 
 public:
 
-	Game(int x=1280,int y=720);
+	Game(int x=1920,int y=1080);
 
 	void run(int frame_per_seconds=30);
 

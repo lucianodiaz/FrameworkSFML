@@ -81,14 +81,9 @@ void Game::createPlayer()
 
 
 	auto barrel = world->getEntityManager()->spawnEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x + 200, y));
-	barrel->ComponentDrawable->layer = 1;
+	barrel->ComponentDrawable->layer = 0;
 	auto barrel1 = world->getEntityManager()->spawnEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x - 200, y));
-	barrel1->ComponentDrawable->layer = 1;
-	auto barrel4 = world->getEntityManager()->spawnEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x, y- 200));
-	barrel4->ComponentDrawable->layer = 1;
-	auto barrel5 = world->getEntityManager()->spawnEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x, y+ 200));
-	auto barrel6 = world->getEntityManager()->spawnEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x+ 200, y + 200));
-	//barrel->CollisionComponent->isBlocking = true;
+	barrel1->ComponentDrawable->layer = 0;
 
 	_player = world->getEntityManager()->spawnEntity<Player>("player", Configuration::Textures::Human, sf::Vector2f(x, y));
 
