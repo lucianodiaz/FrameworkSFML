@@ -47,6 +47,8 @@ void Configuration::initInputs()
 
 	//playerInputs.map(PlayerInputs::Right, Action(sf::Keyboard::Right));
 	playerInputs.map(PlayerInputs::Right, Action(sf::Keyboard::D));
+
+	playerInputs.map(PlayerInputs::LeftClick, Action(sf::Mouse::Button::Left));
 }
 
 void Configuration::initShareds()

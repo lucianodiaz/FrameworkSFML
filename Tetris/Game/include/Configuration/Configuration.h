@@ -16,7 +16,8 @@ public:
 		Up,
 		Down,
 		Right,
-		Left
+		Left,
+		LeftClick
 	};
 	static ActionMap<int>playerInputs;
 

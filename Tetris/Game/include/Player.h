@@ -4,6 +4,9 @@
 #include <ECS/Entity/Gameplay/include/Character.h>
 class Player : public Character
 {
+	bool isPressed = false;
+	sf::Time _timeSinceLastSpawn;
+	void spawn();
 public:
 
 	Player(const string& tag, const size_t id);

@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "World.h"
+
 
 Player::Player(const string& tag, const size_t id) : Character(tag, id)
 {
@@ -19,6 +21,10 @@ Player::Player(const string& tag, const size_t id, sf::Vector2f pos) : Character
 void Player::update(sf::Time deltaTime)
 {
 	Character::update(deltaTime);
+
+	float seconds = deltaTime.asSeconds();
+
+	_timeSinceLastSpawn += deltaTime;
 }
 
 void Player::beginPlay()
@@ -31,6 +37,7 @@ void Player::processEvent()
 {
 	setVelocity(0, 0);
 	ActionTarget::processEvents();
+	/*isPressed = false;*/
 }
 
 void Player::setupInput()
@@ -69,16 +76,28 @@ void Player::setupInput()
 			setVelocity(500 * RIGHT.x, 500 * RIGHT.y);
 
 		});
+
+	bind(Configuration::PlayerInputs::LeftClick, [this](const sf::Event&)
+		{
+			//spawn();
+		});
+}
+void Player::spawn()
+{
+	if (_timeSinceLastSpawn > sf::seconds(0.3))
+	{
+		auto mousePos = sf::Mouse::getPosition(getWorld()->getWindow()->getRenderWindow());
+		auto mouseCoord = getWorld()->getWindow()->getRenderWindow().mapPixelToCoords(mousePos);
+
+		getWorld()->spawnEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(mouseCoord.x, mouseCoord.y));
+		_timeSinceLastSpawn = sf::Time::Zero;
+	}
+	
 }
 
 void Player::handleCollision(Entity<Actor>& otherEntity)
 {
 	Character::handleCollision(otherEntity);
-	//std::cout << "Begin Collision" << std::endl;
-	/*if (otherEntity.tag() == "barrel")
-	{
-		otherEntity.destroy();
-	}*/
 }
 
 void Player::handleEndCollision(Entity<Actor>& otherEntity)
