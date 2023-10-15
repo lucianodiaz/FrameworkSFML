@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include <string>
 #include <vector>
 #include <map>
@@ -14,7 +15,12 @@ using std::string;
 
 class EntityBase
 {
+protected:
+    string _tag{ "default" };
+    bool _alive = true;
+    size_t _id = 0;
 public:
+    EntityBase(const string& tag, const size_t id) :_tag(tag), _id(id){}
     virtual ~EntityBase() = default;
 };
 
@@ -25,13 +31,10 @@ class Entity : public EntityBase
 protected:
 
     template<typename> friend class EntityManager;
-    Entity(const string& tag, const size_t id) : _tag(tag), _id(id) 
+    Entity(const string& tag, const size_t id) : EntityBase(tag,id)
     {
     }
-    string _tag{ "default" };
-    bool _alive = true;
-    size_t _id = 0;
-
+ 
     std::unordered_map<string, std::shared_ptr<ComponentBase>> _components;
 
     template<typename COMPONENT, typename... Args>
@@ -58,10 +61,13 @@ public:
 
 
     void setOnBeginCollision(CollisionEventFunction eventCol);
+    void setOnEndCollision(CollisionEventFunction eventCol);
 
     virtual void handleCollision(Entity<ENTITY>& otherEntity);
+    virtual void handleEndCollision(Entity<ENTITY>& otherEntity);
 
     CollisionEventFunction onBeginCollision;
+    CollisionEventFunction onEndCollision;
 
 };
 
@@ -121,6 +127,17 @@ inline void Entity<ENTITY>::setOnBeginCollision(CollisionEventFunction eventCol)
 }
 
 template<typename ENTITY>
+inline void Entity<ENTITY>::setOnEndCollision(CollisionEventFunction eventCol)
+{
+    onEndCollision = eventCol;
+}
+
+template<typename ENTITY>
 inline void Entity<ENTITY>::handleCollision(Entity<ENTITY>& otherEntity)
+{
+}
+
+template<typename ENTITY>
+inline void Entity<ENTITY>::handleEndCollision(Entity<ENTITY>& otherEntity)
 {
 }

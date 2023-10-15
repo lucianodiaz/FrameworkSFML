@@ -40,3 +40,8 @@ void Character::handleCollision(Entity<Actor>& otherEntity)
 {
 	Pawn::handleCollision(otherEntity);
 }
+
+void Character::handleEndCollision(Entity<Actor>& otherEntity)
+{
+	Pawn::handleEndCollision(otherEntity);
+}

@@ -42,7 +42,7 @@ void Player::setupInput()
 		{
 			sf::Vector2f UP(0, -1);
 
-			setVelocity(100 * UP.x, 100 * UP.y);
+			setVelocity(500 * UP.x, 500 * UP.y);
 
 		});
 
@@ -50,7 +50,7 @@ void Player::setupInput()
 		{
 			sf::Vector2f DOWN(0, 1);
 
-			setVelocity(100 * DOWN.x, 100 * DOWN.y);
+			setVelocity(500 * DOWN.x, 500 * DOWN.y);
 
 		});
 
@@ -58,7 +58,7 @@ void Player::setupInput()
 		{
 			sf::Vector2f LEFT(-1, 0);
 
-			setVelocity(100 * LEFT.x, 100 * LEFT.y);
+			setVelocity(500 * LEFT.x, 500 * LEFT.y);
 
 		});
 
@@ -66,7 +66,7 @@ void Player::setupInput()
 		{
 			sf::Vector2f RIGHT(1, 0);
 
-			setVelocity(100 * RIGHT.x, 100 * RIGHT.y);
+			setVelocity(500 * RIGHT.x, 500 * RIGHT.y);
 
 		});
 }
@@ -74,8 +74,14 @@ void Player::setupInput()
 void Player::handleCollision(Entity<Actor>& otherEntity)
 {
 	Character::handleCollision(otherEntity);
-	if (otherEntity.tag() == "barrel")
+	//std::cout << "Begin Collision" << std::endl;
+	/*if (otherEntity.tag() == "barrel")
 	{
 		otherEntity.destroy();
-	}
+	}*/
+}
+
+void Player::handleEndCollision(Entity<Actor>& otherEntity)
+{
+	Character::handleEndCollision(otherEntity);
 }

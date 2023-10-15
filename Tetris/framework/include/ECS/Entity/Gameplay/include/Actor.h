@@ -28,6 +28,7 @@ public:
 
 
 	virtual void handleCollision(Entity<Actor>& otherEntity) override;
+	virtual void handleEndCollision(Entity<Actor>& otherEntity) override;
 };
 
 template<typename ...Args>

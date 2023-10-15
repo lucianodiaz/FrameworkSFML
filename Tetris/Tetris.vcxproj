@@ -152,6 +152,7 @@
     <ClCompile Include="framework\include\ECS\Entity\Gameplay\Source\Actor.cpp" />
     <ClCompile Include="framework\include\ECS\Entity\Gameplay\Source\Character.cpp" />
     <ClCompile Include="framework\include\ECS\Entity\Gameplay\Source\Pawn.cpp" />
+    <ClCompile Include="framework\include\ECS\System\CollisionLogic\QuadTree.cpp" />
     <ClCompile Include="framework\include\ECS\System\SystemRender.h" />
     <ClCompile Include="Game\source\Configuration\Configuration.cpp" />
     <ClCompile Include="framework\source\Input\Action.cpp" />
@@ -171,6 +172,8 @@
     <ClInclude Include="framework\include\ECS\Entity\Gameplay\include\Actor.h" />
     <ClInclude Include="framework\include\ECS\Entity\Gameplay\include\Character.h" />
     <ClInclude Include="framework\include\ECS\Entity\Gameplay\include\Pawn.h" />
+    <ClInclude Include="framework\include\ECS\System\CollisionLogic\QuadTree.h" />
+    <ClInclude Include="framework\include\ECS\System\CollisionLogic\QuadTreeNode.h" />
     <ClInclude Include="framework\include\ECS\System\CollisionSystem.h" />
     <ClInclude Include="framework\include\ECS\System\System.h" />
     <ClInclude Include="framework\include\ECS\System\TransformSystem.h" />

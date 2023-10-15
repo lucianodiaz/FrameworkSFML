@@ -26,7 +26,10 @@ void Game::run(int frame_per_seconds)
 	_renderSystem->setEntityManager(_entityManager);
 	_systems.push_back(std::move(_renderSystem));
 
-	std::unique_ptr<CollisionSystem> _collisionSystem = std::make_unique<CollisionSystem>();
+
+	sf::FloatRect worldBounds(0.0f, 0.0f, 800, 600);
+	int maxEntities=5;
+	std::unique_ptr<CollisionSystem> _collisionSystem = std::make_unique<CollisionSystem>(worldBounds, maxEntities);
 	_collisionSystem->setEntityManager(_entityManager);
 	_systems.push_back(std::move(_collisionSystem));
 
@@ -88,8 +91,15 @@ void Game::createPlayer()
 	float y = _window->getRenderWindow().getSize().y / 2.0f;
 
 
-	auto barrel = _entityManager->addEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x + 64, y));
-	barrel->CollisionComponent->isBlocking = true;
+	auto barrel = _entityManager->addEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x + 200, y));
+	barrel->ComponentDrawable->layer = 1;
+	auto barrel1 = _entityManager->addEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x - 200, y));
+	barrel1->ComponentDrawable->layer = 1;
+	auto barrel4 = _entityManager->addEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x, y- 200));
+	barrel4->ComponentDrawable->layer = 1;
+	auto barrel5 = _entityManager->addEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x, y+ 200));
+	auto barrel6 = _entityManager->addEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x+ 200, y + 200));
+	//barrel->CollisionComponent->isBlocking = true;
 
 	_player = _entityManager->addEntity<Player>("player", Configuration::Textures::Human, sf::Vector2f(x, y));
 
