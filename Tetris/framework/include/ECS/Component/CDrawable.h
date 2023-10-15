@@ -9,6 +9,7 @@ class CDrawable :
 	sf::Texture _texture;
 public:
 	sf::Sprite sprite;
+	int layer=0;
 
 	CDrawable(Configuration::Textures tex_id) : _texture(Configuration::textures.get(tex_id))
 	{

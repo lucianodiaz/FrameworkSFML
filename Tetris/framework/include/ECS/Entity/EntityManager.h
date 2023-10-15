@@ -61,7 +61,6 @@ inline void EntityManager<T>::update(sf::Time deltaTime)
 			e->update(deltaTime);
 		}
 	}
-
 }
 
 
