@@ -2,8 +2,6 @@
 #include <ECS/System/System.h>
 #include <ECS/Component/CTransform.h>
 #include <ECS/Component/CCollision.h>
-#include <ECS/Entity/Gameplay/include/Actor.h>
-#include <ECS/Entity/EntityManager.h>
 #include <unordered_set>
 #include "CollisionLogic/QuadTree.h"
 
@@ -16,10 +14,10 @@ public:
 	{
 		quadTree = std::make_unique<QuadTree>(worldBounds, maxEntitiesPerNode);
 	}
-
+	void draw(sf::RenderWindow& window) override{}
 	void update(sf::Time deltaTime) override
 	{
-		quadTree->clear();
+		/*quadTree->clear();
 		auto entitiesWithColliders = _entityManager->getEntitiesWithComponent<CTransform, CCollision>();
 		
 		for (const auto& entity : entitiesWithColliders)
@@ -29,18 +27,13 @@ public:
 			quadTree->insert(entity);
 			quadTree->update();
 			checkCollision(transformComponent, collisionComponent,entity);
-		}
+		}*/
 		
 	}
 
 
-	void setEntityManager(std::shared_ptr<EntityManager<Actor>> entityManager)
-	{
-		_entityManager = entityManager;
-	}
-
 private:
-	std::shared_ptr<EntityManager<Actor>> _entityManager;
+
 	std::unordered_set<std::shared_ptr<Actor>> _currentCollision;
 	std::unique_ptr<QuadTree> quadTree;
 
