@@ -19,8 +19,11 @@ protected:
     string _tag{ "default" };
     bool _alive = true;
     size_t _id = 0;
+  
 public:
-    EntityBase(const string& tag, const size_t id) :_tag(tag), _id(id){}
+    EntityBase(const string& tag, const size_t id) :_tag(tag), _id(id)
+    {
+    }
     virtual ~EntityBase() = default;
 };
 

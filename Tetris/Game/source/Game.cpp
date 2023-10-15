@@ -2,10 +2,11 @@
 #include <ECS/System/SystemRender.h>
 #include <ECS/System/CollisionSystem.h>
 
-Game::Game(int x, int y) :
-	_window(std::make_unique<Window>(x,y,"SFML Framework"))
+Game::Game(int x, int y)
 {
-	_entityManager = std::make_shared<EntityManager<Actor>>();
+
+	world = World::getWorld();
+	world->CreateWindow(x, y, "SFML Framework");
 }
 
 void Game::run(int frame_per_seconds)
@@ -18,22 +19,15 @@ void Game::run(int frame_per_seconds)
 
 	createPlayer();
 
-	std::unique_ptr<TransformSystem> _transformSystem = std::make_unique<TransformSystem>();
-	_transformSystem->setEntityManager(_entityManager);
-	_systems.push_back(std::move(_transformSystem));
+	world->addSystem<TransformSystem>();
 
-	std::unique_ptr<SystemRender> _renderSystem = std::make_unique<SystemRender>(_window->getRenderWindow());
-	_renderSystem->setEntityManager(_entityManager);
-	_systems.push_back(std::move(_renderSystem));
-
+	world->addSystem<SystemRender>();
 
 	sf::FloatRect worldBounds(0.0f, 0.0f, 800, 600);
-	int maxEntities=5;
-	std::unique_ptr<CollisionSystem> _collisionSystem = std::make_unique<CollisionSystem>(worldBounds, maxEntities);
-	_collisionSystem->setEntityManager(_entityManager);
-	_systems.push_back(std::move(_collisionSystem));
+	int maxEntities=15;
+	world->addSystem<CollisionSystem>(worldBounds, maxEntities);
 
-	while (_window->isOpen())
+	while (world->getWindow()->isOpen())
 	{
 		processEvents();
 		bool repaint = false;
@@ -53,32 +47,27 @@ Game::~Game()
 }
 
 void Game::update(sf::Time deltaTime)
-{
-	for (auto& s : _systems)
-	{
-		s->update(deltaTime);
-	}
-	_entityManager->update(deltaTime);
+{	
+	world->update(deltaTime);
 }
 
 void Game::draw()
 {
-	/*_window->clear();
-	_window->display();*/
+	world->draw();
 }
 
 void Game::processEvents()
 {
 	sf::Event evt;
-	while (_window->pollEvent(evt))
+	while (world->getWindow()->pollEvent(evt))
 	{
 		if (evt.type == sf::Event::Closed)
-			_window->close();
+			world->getWindow()->close();
 		else if (evt.type == sf::Event::KeyPressed)
 		{
 			if (evt.key.code == sf::Keyboard::Escape)
 			{
-				_window->close();
+				world->getWindow()->close();
 			}
 		}
 	}
@@ -87,20 +76,20 @@ void Game::processEvents()
 
 void Game::createPlayer()
 {
-	float x = _window->getRenderWindow().getSize().x / 2.0f;
-	float y = _window->getRenderWindow().getSize().y / 2.0f;
+	float x = world->getWindow()->getRenderWindow().getSize().x / 2.0f;
+	float y = world->getWindow()->getRenderWindow().getSize().y / 2.0f;
 
 
-	auto barrel = _entityManager->addEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x + 200, y));
+	auto barrel = world->getEntityManager()->spawnEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x + 200, y));
 	barrel->ComponentDrawable->layer = 1;
-	auto barrel1 = _entityManager->addEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x - 200, y));
+	auto barrel1 = world->getEntityManager()->spawnEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x - 200, y));
 	barrel1->ComponentDrawable->layer = 1;
-	auto barrel4 = _entityManager->addEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x, y- 200));
+	auto barrel4 = world->getEntityManager()->spawnEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x, y- 200));
 	barrel4->ComponentDrawable->layer = 1;
-	auto barrel5 = _entityManager->addEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x, y+ 200));
-	auto barrel6 = _entityManager->addEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x+ 200, y + 200));
+	auto barrel5 = world->getEntityManager()->spawnEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x, y+ 200));
+	auto barrel6 = world->getEntityManager()->spawnEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(x+ 200, y + 200));
 	//barrel->CollisionComponent->isBlocking = true;
 
-	_player = _entityManager->addEntity<Player>("player", Configuration::Textures::Human, sf::Vector2f(x, y));
+	_player = world->getEntityManager()->spawnEntity<Player>("player", Configuration::Textures::Human, sf::Vector2f(x, y));
 
 }

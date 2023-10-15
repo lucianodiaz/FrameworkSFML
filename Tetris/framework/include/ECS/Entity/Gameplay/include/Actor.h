@@ -3,6 +3,8 @@
 #include <ECS/Component/CTransform.h>
 #include <SFML/System/Time.hpp>
 
+class World;
+
 class Actor : public Entity<Actor>
 {
 public:
@@ -29,6 +31,8 @@ public:
 
 	virtual void handleCollision(Entity<Actor>& otherEntity) override;
 	virtual void handleEndCollision(Entity<Actor>& otherEntity) override;
+
+	std::shared_ptr<World> getWorld();
 };
 
 template<typename ...Args>

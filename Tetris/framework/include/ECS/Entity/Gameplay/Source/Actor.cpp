@@ -1,5 +1,9 @@
 #include <ECS/Entity/Gameplay/include/Actor.h>
 #include <iostream>
+#include <World.h>
+#include <ECS/Entity/Entity.h>
+
+
 Actor::Actor(const string& tag, const size_t id) :Entity(tag, id)
 {
 	ComponentTransform = addComponent<CTransform>();
@@ -47,4 +51,9 @@ void Actor::handleCollision(Entity<Actor>& otherEntity)
 void Actor::handleEndCollision(Entity<Actor>& otherEntity)
 {
 	//std::cout << _tag << ": EndCollision with: " << otherEntity.tag() << std::endl;
+}
+
+std::shared_ptr<World> Actor::getWorld()
+{
+	return World::getWorld();
 }

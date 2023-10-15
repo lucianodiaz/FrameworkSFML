@@ -27,7 +27,7 @@ public:
 	void update(sf::Time deltaTime);
 
 	template<typename E, typename... Args>
-	shared_ptr<E> addEntity(const string& tag,Args&& ... args);
+	shared_ptr<E> spawnEntity(const string& tag,Args&& ... args);
 
 	list<shared_ptr<T>>& getEntities();
 
@@ -79,7 +79,7 @@ inline list<shared_ptr<T>>& EntityManager<T>::getEntities(const string& tag)
 
 template<typename T>
 template<typename E, typename ...Args>
-inline shared_ptr<E> EntityManager<T>::addEntity(const string& tag, Args&& ...args)
+inline shared_ptr<E> EntityManager<T>::spawnEntity(const string& tag, Args&& ...args)
 {
 	auto e = std::shared_ptr<E>(new E(tag, _totalEntities++, std::forward<Args>(args)...));
 	_entitiesToAdd.push_back(e);
