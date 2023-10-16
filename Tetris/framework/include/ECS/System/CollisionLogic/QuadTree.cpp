@@ -41,7 +41,7 @@ void QuadTree::insert(const std::shared_ptr<Actor>& entity)
 void QuadTree::update()
 {
     // Actualiza el árbol, redistribuyendo las entidades
-    std::list<std::shared_ptr<Actor>> allEntities;
+    std::vector<std::shared_ptr<Actor>> allEntities;
     retrieve(allEntities, _root,nullptr);
 
    /* _root->entities.remove_if([](const std::shared_ptr<Actor>& entity) {
@@ -53,7 +53,7 @@ void QuadTree::update()
         insert(entity);
 }
 
-void QuadTree::retrieve(std::list<std::shared_ptr<Actor>>& result, std::shared_ptr<Actor> entity)
+void QuadTree::retrieve(std::vector<std::shared_ptr<Actor>>& result, std::shared_ptr<Actor> entity)
 {
     retrieve(result, _root, entity);
 }
@@ -74,12 +74,12 @@ void QuadTree::subdivide(std::shared_ptr<QuadTreeNode> node)
     }
 
     // Mover entidades al nodo hijo apropiado
-    std::list<std::shared_ptr<Actor>> entitiesToMove;
+    std::vector<std::shared_ptr<Actor>> entitiesToMove;
     entitiesToMove.swap(node->entities);
 
     for (const auto& entity : entitiesToMove)
     {
-        std::cout << "Se inserto en el cuadrante: " << getQuadrant(node, entity) << std::endl;
+        //std::cout << "Se inserto en el cuadrante: " << getQuadrant(node, entity) << std::endl;
         insert(node->children[getQuadrant(node, entity)], entity);
     }
         
@@ -107,24 +107,32 @@ void QuadTree::merge(std::shared_ptr<QuadTreeNode> node)
     }
 }
 
-void QuadTree::insert(std::shared_ptr<QuadTreeNode> node, std::shared_ptr<Actor> entity)
+void QuadTree::insert(const std::shared_ptr<QuadTreeNode>& node, const std::shared_ptr<Actor>& entity)
 {
-    if (node->children[0] != nullptr)
+    // Inserta una entidad en el árbol
+    if (contains(node, entity))
+        return;
+
+    // Subdivide si es necesario
+    if (node->children[0] == nullptr && node->entities.size() >= _maxEntitiesPerNode)
+        subdivide(node);
+
+    // Inserta en los hijos si es posible
+    for (const auto& child : node->children)
     {
-        for (const auto& child : node->children)
+        if (child != nullptr)
         {
-            if (child != nullptr && child->bounds.intersects(entity->getComponent<CDrawable>()->sprite.getGlobalBounds()))
-            {
-                insert(child, entity);
-                return;
-            }
+            if(child->bounds.intersects(entity->getComponent<CDrawable>()->sprite.getGlobalBounds()))
+            insert(child, entity);
+            return;
         }
     }
 
+    // Añade la entidad al nodo actual
     node->entities.push_back(entity);
 }
 
-void QuadTree::retrieve(std::list<std::shared_ptr<Actor>>& result, std::shared_ptr<QuadTreeNode> node, std::shared_ptr<Actor> entity)
+void QuadTree::retrieve(std::vector<std::shared_ptr<Actor>>& result, std::shared_ptr<QuadTreeNode> node, std::shared_ptr<Actor> entity)
 {
     // Obtiene entidades que podrían colisionar con la entidad dada
     for (const auto& child : node->children)

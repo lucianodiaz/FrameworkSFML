@@ -9,6 +9,6 @@ class QuadTreeNode
 {
 public:
 	sf::FloatRect bounds;
-	std::list<std::shared_ptr<Actor>> entities;
+	std::vector<std::shared_ptr<Actor>> entities;
 	std::array<std::shared_ptr<QuadTreeNode>, 4> children;
 };

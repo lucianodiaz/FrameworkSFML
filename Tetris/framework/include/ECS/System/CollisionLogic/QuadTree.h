@@ -9,10 +9,10 @@ public:
 
 	void clear();
 	void insert(const std::shared_ptr<Actor>& entity);
-	void insert(std::shared_ptr<QuadTreeNode> node, std::shared_ptr<Actor> entity);
+	void insert(const std::shared_ptr<QuadTreeNode>& node, const std::shared_ptr<Actor>& entity);
 	void update();
-	void retrieve(std::list<std::shared_ptr<Actor>>& result, std::shared_ptr<Actor> entity);
-	void retrieve(std::list<std::shared_ptr<Actor>>& result, std::shared_ptr<QuadTreeNode> node, std::shared_ptr<Actor> entity);
+	void retrieve(std::vector<std::shared_ptr<Actor>>& result, std::shared_ptr<Actor> entity);
+	void retrieve(std::vector<std::shared_ptr<Actor>>& result, std::shared_ptr<QuadTreeNode> node, std::shared_ptr<Actor> entity);
 
 	int getQuadrant(std::shared_ptr<QuadTreeNode> node, std::shared_ptr<Actor> entity);
 
