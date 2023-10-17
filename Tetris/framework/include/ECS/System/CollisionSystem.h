@@ -113,10 +113,10 @@ private:
 		std::vector<std::shared_ptr<Actor>> posibleCollisions;
 		quadTree->retrieve(posibleCollisions, entity);
 
-		if (entity->tag() == "player")
+		/*if (entity->tag() == "player")
 		{
 			std::cout << "Posible collisions: " << posibleCollisions.size() << std::endl;
-		}
+		}*/
 		
 	
 		for (const auto& otherEntity : posibleCollisions)
