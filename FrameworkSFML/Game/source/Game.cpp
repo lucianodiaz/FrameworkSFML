@@ -1,10 +1,11 @@
 #include <Game.h>
 #include <ECS/System/SystemRender.h>
 #include <ECS/System/CollisionSystem.h>
+#include <ECS/System/RotationSystem.h>
+#include <ECS/System/TransformSystem.h>
 
 Game::Game(int x, int y)
 {
-
 	world = World::getWorld();
 	world->CreateWindow(x, y, "SFML Framework");
 }
@@ -20,7 +21,7 @@ void Game::run(int frame_per_seconds)
 	createPlayer();
 
 	world->addSystem<TransformSystem>();
-
+	world->addSystem<RotationSystem>();
 	world->addSystem<SystemRender>();
 
 	sf::FloatRect worldBounds(0,0,world->getWindow()->getRenderWindow().getSize().x, world->getWindow()->getRenderWindow().getSize().y);

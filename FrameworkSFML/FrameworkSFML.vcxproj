@@ -22,8 +22,9 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{92e3de7b-18ec-474c-99ec-08a823219709}</ProjectGuid>
-    <RootNamespace>Tetris</RootNamespace>
+    <RootNamespace>FrameworkSFML</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>FrameworkSFML</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -161,11 +162,13 @@
     <ClCompile Include="Game\main.cpp" />
     <ClCompile Include="framework\source\Window\Window.cpp" />
     <ClCompile Include="Game\source\Player.cpp" />
+    <ClCompile Include="Game\source\Shoot\Shoot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework\include\ECS\Component\CCollision.h" />
     <ClInclude Include="framework\include\ECS\Component\CDrawable.h" />
     <ClInclude Include="framework\include\ECS\Component\Component.h" />
+    <ClInclude Include="framework\include\ECS\Component\CRotation.h" />
     <ClInclude Include="framework\include\ECS\Component\CShape.h" />
     <ClInclude Include="framework\include\ECS\Component\CTransform.h" />
     <ClInclude Include="framework\include\ECS\Entity\Entity.h" />
@@ -176,6 +179,7 @@
     <ClInclude Include="framework\include\ECS\System\CollisionLogic\QuadTree.h" />
     <ClInclude Include="framework\include\ECS\System\CollisionLogic\QuadTreeNode.h" />
     <ClInclude Include="framework\include\ECS\System\CollisionSystem.h" />
+    <ClInclude Include="framework\include\ECS\System\RotationSystem.h" />
     <ClInclude Include="framework\include\ECS\System\System.h" />
     <ClInclude Include="framework\include\ECS\System\TransformSystem.h" />
     <ClInclude Include="framework\include\World.h" />
@@ -187,6 +191,7 @@
     <ClInclude Include="Game\include\Game.h" />
     <ClInclude Include="framework\include\Window\Window.h" />
     <ClInclude Include="Game\include\Player.h" />
+    <ClInclude Include="Game\include\Shoot\Shoot.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\Sprites\barrel.png" />

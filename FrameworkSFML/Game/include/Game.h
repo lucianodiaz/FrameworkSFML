@@ -1,10 +1,9 @@
 #pragma once
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include <Player.h>
 #include <ECS/Entity/EntityManager.h>
 #include <ECS/Entity/Gameplay/include/Actor.h>
-#include <ECS/System/TransformSystem.h>
+#include <Player.h>
 #include <World.h>
 
 class Game

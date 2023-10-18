@@ -18,7 +18,7 @@ public:
         {
             auto transform = entity->getComponent<CTransform>();
             // Actualizar la posición basada en la velocidad
-            transform->position += transform->velocity * deltaTime.asSeconds();
+            transform->position += transform->offset;
         }
     }
     void draw(sf::RenderWindow& window) override {}

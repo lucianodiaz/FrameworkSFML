@@ -40,7 +40,7 @@ sf::Vector2f& Actor::getPosition()
 
 sf::Vector2f& Actor::getVelocity()
 {
-	return ComponentTransform->velocity;
+	return ComponentTransform->offset;
 }
 
 void Actor::handleCollision(Entity<Actor>& otherEntity)
