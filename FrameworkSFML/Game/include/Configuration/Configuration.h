@@ -26,6 +26,7 @@ public:
 		Default,
 		Barrel,
 		Human,
+		Ship
 	};
 
 	static ResourceManager<sf::Texture> textures;

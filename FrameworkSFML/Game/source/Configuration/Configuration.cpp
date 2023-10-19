@@ -20,6 +20,7 @@ void Configuration::initTextures()
 	textures.load(Textures::Barrel, "assets/Sprites/barrel.png");
 	textures.load(Textures::Default, "assets/Sprites/default.png");
 	textures.load(Textures::Human, "assets/Sprites/human.png");
+	textures.load(Textures::Ship, "assets/Sprites/ship.png");
 }
 
 void Configuration::initMusic()

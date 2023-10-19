@@ -12,6 +12,7 @@ Shoot::Shoot(const string& tag, const size_t id, Configuration::Textures tex_id,
 {
 	ComponentDrawable = addComponent<CDrawable>(tex_id);
 	ComponentRotation = addComponent<CRotation>();
+	ComponentRotation->rotation = rot;
 	beginPlay();
 }
 

@@ -96,6 +96,6 @@ void Game::createPlayer()
 	}
 
 
-	_player = world->getEntityManager()->spawnEntity<Player>("player", Configuration::Textures::Human, sf::Vector2f(x, y));
+	_player = world->getEntityManager()->spawnEntity<Player>("ship", Configuration::Textures::Ship, sf::Vector2f(x, y));
 
 }
