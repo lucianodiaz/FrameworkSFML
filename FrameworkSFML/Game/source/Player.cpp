@@ -92,8 +92,10 @@ void Player::shoot()
 {
 	if (_timeSinceLastSpawn > sf::seconds(0.3))
 	{
-
-		getWorld()->spawnEntity<Shoot>("Shoot", Configuration::Textures::Barrel,ComponentTransform->position, ComponentRotation->rotation);
+		auto newPos = sf::Vector2f( ComponentTransform->position.x, ComponentTransform->position.y + 20);
+		auto shoot = getWorld()->spawnEntity<Shoot>("Shoot", Configuration::Textures::Barrel,newPos, ComponentRotation->rotation);
+		auto p = shared_from_this();
+		shoot->attachTo(p);
 		_timeSinceLastSpawn = sf::Time::Zero;
 	}
 	

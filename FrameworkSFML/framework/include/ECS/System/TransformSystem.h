@@ -18,7 +18,22 @@ public:
         {
             auto transform = entity->getComponent<CTransform>();
             // Actualizar la posición basada en la velocidad
-            transform->position += transform->offset;
+            if (entity->getParent())
+            {
+                auto parentTransform = entity->getParent()->getComponent<CTransform>();
+                if (parentTransform)
+                {
+                    // Calcula la nueva posición en relación con el padre
+                    sf::Vector2f relativePosition = entity->getRelativePosition();
+                    sf::Vector2f newPosition = parentTransform->position + relativePosition;
+                    transform->position = newPosition;
+                }
+            }
+            else
+            {
+                transform->position += transform->offset;
+            }
+            
         }
     }
     void draw(sf::RenderWindow& window) override {}

@@ -1,7 +1,5 @@
 #include <ECS/Entity/Gameplay/include/Actor.h>
-#include <iostream>
 #include <World.h>
-#include <ECS/Entity/Entity.h>
 
 
 Actor::Actor(const string& tag, const size_t id) :Entity(tag, id)
@@ -22,6 +20,7 @@ void Actor::update(sf::Time deltaTime)
 
 void Actor::beginPlay()
 {
+
 	setOnBeginCollision([this](Entity<Actor>& otherEntity)
 		{
 			this->handleCollision(otherEntity);
@@ -33,10 +32,44 @@ void Actor::beginPlay()
 	});
 }
 
+std::shared_ptr<Actor>& Actor::getParent()
+{
+	return _attachedTo;
+}
+
+void Actor::attachTo(std::shared_ptr<Actor> parent)
+{
+	_attachedTo = parent;
+	auto l = shared_from_this();
+	parent->addChildren(l);
+}
+
+void Actor::addChildren(std::shared_ptr<Actor>& children)
+{
+	_childrens.push_back(children);
+}
+
+
 sf::Vector2f& Actor::getPosition()
 {
 	return	ComponentTransform->position;
 }
+
+sf::Vector2f Actor::getRelativePosition()
+{
+	// // O: insert return statement here
+
+	if (_attachedTo)
+	{
+		sf::Vector2f parentPosition = _attachedTo->getPosition();
+		return (parentPosition - ComponentTransform->position );
+	}
+	else
+	{
+		return ComponentTransform->position;
+	}
+}
+
 
 sf::Vector2f& Actor::getVelocity()
 {

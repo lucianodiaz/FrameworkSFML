@@ -5,20 +5,30 @@
 
 class World;
 
-class Actor : public Entity<Actor>
+class Actor : public Entity<Actor>, public std::enable_shared_from_this<Actor>
 {
+
+protected:
+	std::shared_ptr<Actor> _attachedTo;
+	std::vector<std::shared_ptr<Actor>> _childrens;
+
+	void addChildren(std::shared_ptr<Actor>& children);
 public:
 	Actor(const string& tag, const size_t id);
 	Actor(const string& tag, const size_t id, sf::Vector2f pos);
 	virtual void update(sf::Time deltaTime);
 	virtual void beginPlay();
 
+	std::shared_ptr<Actor>& getParent();
+
+	void attachTo(std::shared_ptr<Actor> parent);
 
 	template<typename ... Args>
 	void setPosition(Args&& ... args);
 
 	virtual sf::Vector2f& getPosition();
 
+	sf::Vector2f getRelativePosition();
 
 	template<typename ... Args>
 	void setVelocity(Args&& ... args);
