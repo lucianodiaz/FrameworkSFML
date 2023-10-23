@@ -41,11 +41,12 @@ void Player::update(sf::Time deltaTime) {
 
 	if (_isMoving)
 	{
-		float angle = ComponentRotation->rotation / 180 * 3.14159 - 3.14159 / 2;
-		_impulse += sf::Vector2f(std::cos(angle), std::sin(angle)) * 100.0f * seconds;
+		float angleInRadians = (ComponentRotation->rotation) * 3.14159265 / 180; // Convierte el ángulo a radianes
+
+		_impulse += sf::Vector2f(cos(angleInRadians), sin(angleInRadians)) * 100.0f * seconds;
 	}
 
-	ComponentTransform->offset = seconds * _impulse;
+ 	ComponentTransform->offset = seconds * _impulse;
 }
 
 
@@ -92,10 +93,15 @@ void Player::shoot()
 {
 	if (_timeSinceLastSpawn > sf::seconds(0.3))
 	{
-		auto newPos = sf::Vector2f( ComponentTransform->position.x, ComponentTransform->position.y + 20);
+		auto newPos = sf::Vector2f( ComponentTransform->position.x, ComponentTransform->position.y);
 		auto shoot = getWorld()->spawnEntity<Shoot>("Shoot", Configuration::Textures::Barrel,newPos, ComponentRotation->rotation);
 		auto p = shared_from_this();
-		shoot->attachTo(p);
+
+		float angleInRadians = (ComponentRotation->rotation) * 3.14159265 / 180; // Convierte el ángulo a radianes
+		sf::Vector2f direction(cos(angleInRadians), sin(angleInRadians));
+
+		auto offset = 60.0f * direction;;
+		shoot->attachTo(p, offset);
 		_timeSinceLastSpawn = sf::Time::Zero;
 	}
 	

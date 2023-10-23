@@ -154,6 +154,7 @@
     <ClCompile Include="framework\include\ECS\Entity\Gameplay\Source\Character.cpp" />
     <ClCompile Include="framework\include\ECS\Entity\Gameplay\Source\Pawn.cpp" />
     <ClCompile Include="framework\include\ECS\System\CollisionLogic\QuadTree.cpp" />
+    <ClCompile Include="framework\include\ECS\System\SystemRender.cpp" />
     <ClCompile Include="framework\include\ECS\System\SystemRender.h" />
     <ClCompile Include="framework\source\World.cpp" />
     <ClCompile Include="Game\source\Configuration\Configuration.cpp" />

@@ -10,9 +10,9 @@ class Actor : public Entity<Actor>, public std::enable_shared_from_this<Actor>
 
 protected:
 	std::shared_ptr<Actor> _attachedTo;
-	std::vector<std::shared_ptr<Actor>> _childrens;
+	std::vector<std::pair<std::shared_ptr<Actor>, sf::Vector2f>> _childrens;
 
-	void addChildren(std::shared_ptr<Actor>& children);
+	void addChildren(std::shared_ptr<Actor>& child, sf::Vector2f relativePosition);
 public:
 	Actor(const string& tag, const size_t id);
 	Actor(const string& tag, const size_t id, sf::Vector2f pos);
@@ -23,6 +23,9 @@ public:
 
 	void attachTo(std::shared_ptr<Actor> parent);
 
+	void attachTo(std::shared_ptr<Actor> parent,sf::Vector2f& relativePosition);
+
+	std::vector<std::pair<std::shared_ptr<Actor>, sf::Vector2f>>& getChildren();
 	template<typename ... Args>
 	void setPosition(Args&& ... args);
 

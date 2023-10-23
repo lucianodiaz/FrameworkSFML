@@ -1,8 +1,8 @@
 #include <Game.h>
-#include <ECS/System/SystemRender.h>
 #include <ECS/System/CollisionSystem.h>
 #include <ECS/System/RotationSystem.h>
 #include <ECS/System/TransformSystem.h>
+#include <ECS/System/SystemRender.h>
 
 Game::Game(int x, int y)
 {

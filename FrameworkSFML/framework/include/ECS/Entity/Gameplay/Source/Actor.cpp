@@ -41,12 +41,26 @@ void Actor::attachTo(std::shared_ptr<Actor> parent)
 {
 	_attachedTo = parent;
 	auto l = shared_from_this();
-	parent->addChildren(l);
+	auto relativePosition = sf::Vector2f(0, 0);
+	parent->addChildren(l, relativePosition);
 }
 
-void Actor::addChildren(std::shared_ptr<Actor>& children)
+void Actor::attachTo(std::shared_ptr<Actor> parent, sf::Vector2f& relativePosition)
 {
-	_childrens.push_back(children);
+	_attachedTo = parent;
+	auto l = shared_from_this();
+	parent->addChildren(l, relativePosition);
+}
+
+std::vector<std::pair<std::shared_ptr<Actor>, sf::Vector2f>>& Actor::getChildren()
+{
+	// // O: insert return statement here
+	return _childrens;
+}
+
+void Actor::addChildren(std::shared_ptr<Actor>& child, sf::Vector2f relativePosition)
+{
+	_childrens.push_back(std::make_pair(child, relativePosition));
 }
 
 
