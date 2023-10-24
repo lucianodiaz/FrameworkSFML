@@ -27,7 +27,7 @@ void Shoot::beginPlay()
 {
 
 	Actor::beginPlay();
-	initialLifespan = 0.3;
+	initialLifespan = 1;
 	ComponentCollision = addComponent<CCollision>(ComponentDrawable->sprite.getGlobalBounds());
 	float rotationInRadians = ComponentRotation->rotation * 3.14159 / 180.0;
 	auto dirX = std::cos(rotationInRadians);
@@ -40,7 +40,7 @@ void Shoot::beginPlay()
 	}
 	sf::Vector2f direction = sf::Vector2f(dirX, dirY);
 
-	ComponentProjectile = addComponent<CProjectile>(direction,400);
+	ComponentProjectile = addComponent<CProjectile>(direction,velocity);
 
 }
 

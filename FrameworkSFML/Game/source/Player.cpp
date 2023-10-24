@@ -104,6 +104,9 @@ void Player::shoot()
 		auto shoot = getWorld()->spawnEntity<Shoot>("Shoot", Configuration::Textures::Barrel,newPos+ offset, ComponentRotation->rotation);
 		//auto p = shared_from_this();
 
+		float velocity = sqrt((_impulse.x * _impulse.x) + (_impulse.y * _impulse.y));
+		shoot->getComponentProjectile().speed += velocity;
+
 
 		//shoot->attachTo(p, offset);
 		_timeSinceLastSpawn = sf::Time::Zero;
