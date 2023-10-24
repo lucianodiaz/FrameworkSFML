@@ -16,11 +16,21 @@ Actor::Actor(const string& tag, const size_t id, sf::Vector2f pos) :Entity(tag, 
 
 void Actor::update(sf::Time deltaTime)
 {
+	if (lifespan > 0)
+	{
+		_lifespan += deltaTime;
+		if (_lifespan >= sf::seconds(lifespan))
+		{
+			destroy();
+		}
+	}
+
 }
 
 void Actor::beginPlay()
 {
-
+	
+	_lifespan = sf::Time::Zero;
 	setOnBeginCollision([this](Entity<Actor>& otherEntity)
 		{
 			this->handleCollision(otherEntity);

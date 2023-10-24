@@ -7,11 +7,11 @@ class World;
 
 class Actor : public Entity<Actor>, public std::enable_shared_from_this<Actor>
 {
-
+private:
+	sf::Time _lifespan;
 protected:
 	std::shared_ptr<Actor> _attachedTo;
 	std::vector<std::pair<std::shared_ptr<Actor>, sf::Vector2f>> _childrens;
-
 	void addChildren(std::shared_ptr<Actor>& child, sf::Vector2f relativePosition);
 public:
 	Actor(const string& tag, const size_t id);
@@ -46,6 +46,9 @@ public:
 	virtual void handleEndCollision(Entity<Actor>& otherEntity) override;
 
 	std::shared_ptr<World> getWorld();
+
+	/*How long this Actor lives before dying, 0=forever. Note this is the INITIAL value and should not be modified once play has begun. */
+	float lifespan=-1;
 };
 
 template<typename ...Args>

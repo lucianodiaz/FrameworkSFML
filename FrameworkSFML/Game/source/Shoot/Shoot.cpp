@@ -25,7 +25,9 @@ Shoot::Shoot(const string& tag, const size_t id, sf::Vector2f pos) : Actor(tag, 
 
 void Shoot::beginPlay()
 {
+
 	Actor::beginPlay();
+	lifespan = 0.3;
 	ComponentCollision = addComponent<CCollision>(ComponentDrawable->sprite.getGlobalBounds());
 	float rotationInRadians = ComponentRotation->rotation * 3.14159 / 180.0;
 	auto dirX = std::cos(rotationInRadians);
