@@ -50,6 +50,38 @@ Game::~Game()
 void Game::update(sf::Time deltaTime)
 {	
 	world->update(deltaTime);
+
+	//Only for pouporse of this game we need to change position of
+	//ships and object in the game, when they are bound of the window
+	//we need to tp them to other side
+	//like an uclidean torus world
+	auto entities = world->getEntityManager()->getEntities();
+
+	for (auto& entity : entities)
+	{
+		sf::Vector2f& pos = entity->ComponentTransform->position;
+		float xWorld = world->getWindow()->getRenderWindow().getSize().x;
+		float yWorld = world->getWindow()->getRenderWindow().getSize().y;
+		if (pos.x < 0)
+		{
+			pos.x = xWorld;
+			pos.y = yWorld - pos.y;
+		}
+		else if (pos.x > xWorld)
+		{
+			pos.x = 0;
+			pos.y = yWorld - pos.y;
+		}
+		if (pos.y < 0)
+		{
+			pos.y = yWorld;
+		}
+		else if (pos.y > yWorld)
+		{
+			pos.y = 0; 
+		}
+
+	}
 }
 
 void Game::draw()
@@ -81,19 +113,19 @@ void Game::createPlayer()
 	float y = world->getWindow()->getRenderWindow().getSize().y / 2.0f;
 
 
-	const int numBarrels = 19;
-	const float circleRadius = 200.0f;  // Radio del círculo
-	const float angleIncrement = (2 * 3.14159) / numBarrels;  // Incremento angular
+	//const int numBarrels = 19;
+	//const float circleRadius = 200.0f;  // Radio del círculo
+	//const float angleIncrement = (2 * 3.14159) / numBarrels;  // Incremento angular
 
-	for (int i = 0; i < numBarrels; i++)
-	{
-		float angle = i * angleIncrement;  // Ángulo para la posición en el círculo
-		float xPos = x + circleRadius * std::cos(angle);  // Calcular la posición x
-		float yPos = y + circleRadius * std::sin(angle);  // Calcular la posición y
+	//for (int i = 0; i < numBarrels; i++)
+	//{
+	//	float angle = i * angleIncrement;  // Ángulo para la posición en el círculo
+	//	float xPos = x + circleRadius * std::cos(angle);  // Calcular la posición x
+	//	float yPos = y + circleRadius * std::sin(angle);  // Calcular la posición y
 
-		auto barrel = world->getEntityManager()->spawnEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(xPos, yPos));
-		barrel->ComponentDrawable->layer = 0;
-	}
+	//	auto barrel = world->getEntityManager()->spawnEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(xPos, yPos));
+	//	barrel->ComponentDrawable->layer = 0;
+	//}
 
 
 	_player = world->getEntityManager()->spawnEntity<Player>("ship", Configuration::Textures::Ship, sf::Vector2f(x, y));
