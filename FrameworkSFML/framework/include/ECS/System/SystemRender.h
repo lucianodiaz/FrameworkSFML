@@ -1,5 +1,8 @@
 #pragma once
 #include "System.h"
+#include <ECS/Component/CDrawable.h>
+#include <ECS/Component/CRotation.h>
+#include <ECS/Component/CTransform.h>
 
 class SystemRender : public BaseSystem
 {
