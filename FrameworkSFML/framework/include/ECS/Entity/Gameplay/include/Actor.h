@@ -48,7 +48,7 @@ public:
 	std::shared_ptr<World> getWorld();
 
 	/*How long this Actor lives before dying, 0=forever. Note this is the INITIAL value and should not be modified once play has begun. */
-	float lifespan=-1;
+	float initialLifespan=-1;
 };
 
 template<typename ...Args>

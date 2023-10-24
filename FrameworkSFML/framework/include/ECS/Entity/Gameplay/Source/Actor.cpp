@@ -16,10 +16,10 @@ Actor::Actor(const string& tag, const size_t id, sf::Vector2f pos) :Entity(tag, 
 
 void Actor::update(sf::Time deltaTime)
 {
-	if (lifespan > 0)
+	if (initialLifespan > 0)
 	{
 		_lifespan += deltaTime;
-		if (_lifespan >= sf::seconds(lifespan))
+		if (_lifespan >= sf::seconds(initialLifespan))
 		{
 			destroy();
 		}

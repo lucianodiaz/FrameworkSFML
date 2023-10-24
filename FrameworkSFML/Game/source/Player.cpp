@@ -102,7 +102,7 @@ void Player::shoot()
 
 
 		auto shoot = getWorld()->spawnEntity<Shoot>("Shoot", Configuration::Textures::Barrel,newPos+ offset, ComponentRotation->rotation);
-		auto p = shared_from_this();
+		//auto p = shared_from_this();
 
 
 		//shoot->attachTo(p, offset);
