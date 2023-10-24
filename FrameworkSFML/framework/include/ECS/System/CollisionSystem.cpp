@@ -122,7 +122,7 @@ void CollisionSystem::checkCollision(std::shared_ptr<CTransform> transform, std:
 			otherBound.top += otherTransform->position.y;
 
 			quadTree->update();
-			if (entityBounds.intersects(otherBound))
+ 			if (entityBounds.intersects(otherBound))
 			{
 				if (otherCollider->isBlocking)
 				{

@@ -94,14 +94,18 @@ void Player::shoot()
 	if (_timeSinceLastSpawn > sf::seconds(0.3))
 	{
 		auto newPos = sf::Vector2f( ComponentTransform->position.x, ComponentTransform->position.y);
-		auto shoot = getWorld()->spawnEntity<Shoot>("Shoot", Configuration::Textures::Barrel,newPos, ComponentRotation->rotation);
-		auto p = shared_from_this();
-
+		
 		float angleInRadians = (ComponentRotation->rotation) * 3.14159265 / 180; // Convierte el ángulo a radianes
 		sf::Vector2f direction(cos(angleInRadians), sin(angleInRadians));
 
-		auto offset = 60.0f * direction;;
-		shoot->attachTo(p, offset);
+		auto offset = 70.0f * direction;
+
+
+		auto shoot = getWorld()->spawnEntity<Shoot>("Shoot", Configuration::Textures::Barrel,newPos+ offset, ComponentRotation->rotation);
+		auto p = shared_from_this();
+
+
+		//shoot->attachTo(p, offset);
 		_timeSinceLastSpawn = sf::Time::Zero;
 	}
 	

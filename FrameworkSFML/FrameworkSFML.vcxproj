@@ -172,6 +172,7 @@
     <ClInclude Include="framework\include\ECS\Component\CCollision.h" />
     <ClInclude Include="framework\include\ECS\Component\CDrawable.h" />
     <ClInclude Include="framework\include\ECS\Component\Component.h" />
+    <ClInclude Include="framework\include\ECS\Component\CProjectile.h" />
     <ClInclude Include="framework\include\ECS\Component\CRotation.h" />
     <ClInclude Include="framework\include\ECS\Component\CShape.h" />
     <ClInclude Include="framework\include\ECS\Component\CTransform.h" />
