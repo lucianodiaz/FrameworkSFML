@@ -27,5 +27,7 @@ public:
 
 	virtual void handleEndCollision(Entity<Actor>& otherEntity) override;
 
+	CProjectile& getComponentProjectile() { return *ComponentProjectile; }
+	float velocity=400;
 
 };
