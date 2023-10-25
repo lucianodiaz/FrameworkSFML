@@ -101,7 +101,7 @@ void Player::shoot()
 		auto offset = 70.0f * direction;
 
 
-		auto shoot = getWorld()->spawnEntity<Shoot>("Shoot", Configuration::Textures::Barrel,newPos+ offset, ComponentRotation->rotation);
+		auto shoot = getWorld()->spawnEntity<Shoot>("Shoot", Configuration::Textures::ShootPlayer,newPos+ offset, ComponentRotation->rotation);
 		//auto p = shared_from_this();
 
 		float velocity = sqrt((_impulse.x * _impulse.x) + (_impulse.y * _impulse.y));

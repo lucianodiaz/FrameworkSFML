@@ -21,6 +21,8 @@ void Configuration::initTextures()
 	textures.load(Textures::Default, "assets/Sprites/default.png");
 	textures.load(Textures::Human, "assets/Sprites/human.png");
 	textures.load(Textures::Ship, "assets/Sprites/ship.png");
+	textures.load(Textures::ShootPlayer, "assets/Sprites/player.png");
+	textures.load(Textures::ShootEnemy, "assets/Sprites/saucer.png");
 }
 
 void Configuration::initMusic()

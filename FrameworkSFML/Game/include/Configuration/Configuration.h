@@ -26,7 +26,9 @@ public:
 		Default,
 		Barrel,
 		Human,
-		Ship
+		Ship,
+		ShootPlayer,
+		ShootEnemy
 	};
 
 	static ResourceManager<sf::Texture> textures;
