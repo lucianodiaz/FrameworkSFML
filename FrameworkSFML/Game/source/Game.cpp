@@ -112,22 +112,6 @@ void Game::createPlayer()
 	float x = world->getWindow()->getRenderWindow().getSize().x / 2.0f;
 	float y = world->getWindow()->getRenderWindow().getSize().y / 2.0f;
 
-
-	//const int numBarrels = 19;
-	//const float circleRadius = 200.0f;  // Radio del círculo
-	//const float angleIncrement = (2 * 3.14159) / numBarrels;  // Incremento angular
-
-	//for (int i = 0; i < numBarrels; i++)
-	//{
-	//	float angle = i * angleIncrement;  // Ángulo para la posición en el círculo
-	//	float xPos = x + circleRadius * std::cos(angle);  // Calcular la posición x
-	//	float yPos = y + circleRadius * std::sin(angle);  // Calcular la posición y
-
-	//	auto barrel = world->getEntityManager()->spawnEntity<Pawn>("barrel", Configuration::Textures::Barrel, sf::Vector2f(xPos, yPos));
-	//	barrel->ComponentDrawable->layer = 0;
-	//}
-
-
 	_player = world->getEntityManager()->spawnEntity<Player>("ship", Configuration::Textures::Ship, sf::Vector2f(x, y));
 
 }
