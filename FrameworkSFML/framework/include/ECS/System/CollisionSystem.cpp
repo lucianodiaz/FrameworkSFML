@@ -12,7 +12,6 @@ CollisionSystem::CollisionSystem(sf::FloatRect worldBounds, int maxEntitiesPerNo
 void CollisionSystem::draw(sf::RenderWindow& window)
 {
 	auto entities = _entityManager->getEntitiesWithComponent<CTransform, CCollision>();
-
 	for (const auto& entity : entities)
 	{
 		if (entity->getComponent<CCollision>()->drawDebug)
