@@ -2,6 +2,10 @@
 #include "World.h"
 #include <Shoot/Shoot.h>
 
+Player::~Player()
+{
+}
+
 Player::Player(const string& tag, const size_t id) : Character(tag, id)
 {
 	beginPlay();
@@ -102,7 +106,8 @@ void Player::shoot()
 
 
 		auto shoot = getWorld()->spawnEntity<Shoot>("Shoot", Configuration::Textures::ShootPlayer,newPos+ offset, ComponentRotation->rotation);
-		//auto p = shared_from_this();
+		auto p = shared_from_this();
+		shoot->SetOwner(p);
 
 		float velocity = sqrt((_impulse.x * _impulse.x) + (_impulse.y * _impulse.y));
 		shoot->getComponentProjectile().speed += velocity;

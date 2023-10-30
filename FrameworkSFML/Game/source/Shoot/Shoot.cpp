@@ -1,6 +1,10 @@
 #include "Shoot/Shoot.h"
 
 
+Shoot::~Shoot()
+{
+}
+
 Shoot::Shoot(const string& tag, const size_t id) : Actor(tag,id)
 {
 	ComponentDrawable = addComponent<CDrawable>();
@@ -53,7 +57,7 @@ void Shoot::update(sf::Time deltaTime)
 
 void Shoot::handleCollision(Entity<Actor>& otherEntity)
 {
-	if (otherEntity.tag() != "Shoot")
+	if (otherEntity.tag() != "Shoot" && otherEntity.tag() != _owner->tag())
 	{
 		destroy();
 	}

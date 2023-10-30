@@ -4,6 +4,7 @@
 class Character : public Pawn
 {
 public:
+	virtual ~Character() {};
 	Character(const string& tag, const size_t id);
 	Character(const string& tag, const size_t id,Configuration::Textures tex_id);
 	Character(const string& tag, const size_t id, sf::Vector2f pos);

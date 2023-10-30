@@ -50,6 +50,7 @@ protected:
 
 public:
 
+    virtual ~Entity(){};
     void destroy() { _alive = false; };
     bool isAlive() const { return _alive; }
     const string& tag() const { return _tag; }

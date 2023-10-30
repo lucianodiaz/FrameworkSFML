@@ -16,6 +16,7 @@ private:
 	std::shared_ptr<CCollision>ComponentCollision;
 	sf::Vector2f _impulse;
 public:
+	virtual ~Shoot();
 	Shoot(const string& tag, const size_t id);
 	Shoot(const string& tag, const size_t id, Configuration::Textures tex_id, sf::Vector2f pos,float rot);
 	Shoot(const string& tag, const size_t id, sf::Vector2f pos);

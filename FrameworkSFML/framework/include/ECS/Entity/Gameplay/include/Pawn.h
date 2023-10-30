@@ -10,6 +10,7 @@ class Pawn : public Actor,
 {
 public:
 
+	virtual ~Pawn(){};
 	Pawn(const string& tag, const size_t id);
 	Pawn(const string& tag, const size_t id, Configuration::Textures tex_id);
 	Pawn(const string& tag, const size_t id, sf::Vector2f pos);

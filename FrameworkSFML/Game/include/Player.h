@@ -9,11 +9,11 @@ class Player : public Character
 	bool _isMoving;
 	sf::Time _timeSinceLastSpawn;
 	sf::Vector2f _impulse;
-	
 
 	void shoot();
 public:
 
+	virtual ~Player();
 	Player(const string& tag, const size_t id);
 	Player(const string& tag, const size_t id,Configuration::Textures tex_id ,sf::Vector2f pos);
 	Player(const string& tag, const size_t id,sf::Vector2f pos);
