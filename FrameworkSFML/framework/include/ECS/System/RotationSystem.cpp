@@ -22,7 +22,7 @@ void RotationSystem::update(sf::Time deltaTime)
         float angle = rotationComponent->addRotation * 180 * seconds;
         drawComponent->sprite.rotate(angle);
         rotationComponent->rotation = drawComponent->sprite.getRotation();
-        //rotationComponent->rotation = 0;
+        rotationComponent->addRotation = 0;
     }
 
 }
