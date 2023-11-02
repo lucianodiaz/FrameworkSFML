@@ -1,8 +1,10 @@
 #include "World.h"
+#include "Math/Random.h"
 
 World::World()
 {
 	_entityManager = std::make_shared<EntityManager<Actor>>();
+	randomlib::rand_init();
 }
 
 void World::CreateWindow(int width, int height, string tittle)
@@ -17,7 +19,7 @@ void World::update(sf::Time deltaTime)
 	{
 		s->update(deltaTime);
 	}
-	
+	timerManager.update();
 }
 
 void World::draw()

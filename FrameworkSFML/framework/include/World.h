@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <Window/Window.h>
 #include <ECS/System/System.h>
+#include <TimerManager.h>
 
 
 class World
@@ -14,7 +15,9 @@ class World
     std::unique_ptr<Window> _window;
 
 
-    std::vector<std::unique_ptr<BaseSystem>> _systems;
+    std::vector<std::shared_ptr<BaseSystem>> _systems;
+
+    TimerManager timerManager;
 public:
 
     static std::shared_ptr<World> getWorld()
@@ -38,6 +41,8 @@ public:
 
     template<typename S, typename... Args>
     void addSystem(Args&&... args);
+
+    TimerManager& GetTimerManager() { return timerManager; }
 };
 
 template<typename E, typename ...Args>
@@ -49,7 +54,7 @@ inline shared_ptr<E> World::spawnEntity(const string& tag, Args && ...args)
 template<typename S, typename ...Args>
 inline void World::addSystem(Args && ...args)
 {
-    std::unique_ptr<S> system = std::make_unique<S>(std::forward<Args>(args)...);
+    std::shared_ptr<S> system = std::make_shared<S>(std::forward<Args>(args)...);
     system->setEntityManager(_entityManager);
-    _systems.push_back(std::move(system));
+    _systems.push_back(system);
 }
