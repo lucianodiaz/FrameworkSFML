@@ -36,12 +36,12 @@ void Character::setupInput()
 	Pawn::setupInput();
 }
 
-void Character::handleCollision(Entity<Actor>& otherEntity)
+void Character::handleCollision(Actor& otherEntity)
 {
 	Pawn::handleCollision(otherEntity);
 }
 
-void Character::handleEndCollision(Entity<Actor>& otherEntity)
+void Character::handleEndCollision(Actor& otherEntity)
 {
 	Pawn::handleEndCollision(otherEntity);
 }

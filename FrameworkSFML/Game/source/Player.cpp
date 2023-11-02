@@ -45,7 +45,7 @@ void Player::update(sf::Time deltaTime) {
 
 	if (_isMoving)
 	{
-		float angleInRadians = (ComponentRotation->rotation) * 3.14159265 / 180; // Convierte el ángulo a radianes
+		float angleInRadians = (ComponentRotation->getRotation()) * 3.14159265 / 180; // Convierte el ángulo a radianes
 
 		_impulse += sf::Vector2f(cos(angleInRadians), sin(angleInRadians)) * 100.0f * seconds;
 	}
@@ -95,17 +95,17 @@ void Player::setupInput()
 }
 void Player::shoot()
 {
-	if (_timeSinceLastSpawn > sf::seconds(0.3))
+	if (_timeSinceLastSpawn > sf::seconds(0.2))
 	{
 		auto newPos = sf::Vector2f( ComponentTransform->position.x, ComponentTransform->position.y);
 		
-		float angleInRadians = (ComponentRotation->rotation) * 3.14159265 / 180; // Convierte el ángulo a radianes
+		float angleInRadians = (ComponentRotation->getRotation()) * 3.14159265 / 180; // Convierte el ángulo a radianes
 		sf::Vector2f direction(cos(angleInRadians), sin(angleInRadians));
 
 		auto offset = 70.0f * direction;
 
 
-		auto shoot = getWorld()->spawnEntity<Shoot>("Shoot", Configuration::Textures::ShootPlayer,newPos+ offset, ComponentRotation->rotation);
+		auto shoot = getWorld()->spawnEntity<Shoot>("shoot", Configuration::Textures::ShootPlayer,newPos+ offset, ComponentRotation->getRotation());
 		auto p = shared_from_this();
 		shoot->SetOwner(p);
 
@@ -119,12 +119,12 @@ void Player::shoot()
 	
 }
 
-void Player::handleCollision(Entity<Actor>& otherEntity)
+void Player::handleCollision(Actor& otherEntity)
 {
 	Character::handleCollision(otherEntity);
 }
 
-void Player::handleEndCollision(Entity<Actor>& otherEntity)
+void Player::handleEndCollision(Actor& otherEntity)
 {
 	Character::handleEndCollision(otherEntity);
 }

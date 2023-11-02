@@ -46,7 +46,7 @@ protected:
     template<typename COMPONENT>
     void removeComponent();
 
-    using CollisionEventFunction = std::function<void(Entity<ENTITY>& other)>;
+    using CollisionEventFunction = std::function<void(ENTITY& other)>;
 
 public:
 
@@ -67,8 +67,8 @@ public:
     void setOnBeginCollision(CollisionEventFunction eventCol);
     void setOnEndCollision(CollisionEventFunction eventCol);
 
-    virtual void handleCollision(Entity<ENTITY>& otherEntity);
-    virtual void handleEndCollision(Entity<ENTITY>& otherEntity);
+    virtual void handleCollision(ENTITY& otherEntity);
+    virtual void handleEndCollision(ENTITY& otherEntity);
 
     CollisionEventFunction onBeginCollision;
     CollisionEventFunction onEndCollision;
@@ -137,11 +137,11 @@ inline void Entity<ENTITY>::setOnEndCollision(CollisionEventFunction eventCol)
 }
 
 template<typename ENTITY>
-inline void Entity<ENTITY>::handleCollision(Entity<ENTITY>& otherEntity)
+inline void Entity<ENTITY>::handleCollision(ENTITY& otherEntity)
 {
 }
 
 template<typename ENTITY>
-inline void Entity<ENTITY>::handleEndCollision(Entity<ENTITY>& otherEntity)
+inline void Entity<ENTITY>::handleEndCollision(ENTITY& otherEntity)
 {
 }

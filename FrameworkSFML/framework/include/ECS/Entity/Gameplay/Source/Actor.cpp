@@ -31,12 +31,12 @@ void Actor::beginPlay()
 {
 	
 	_lifespan = sf::Time::Zero;
-	setOnBeginCollision([this](Entity<Actor>& otherEntity)
+	setOnBeginCollision([this](Actor& otherEntity)
 		{
 			this->handleCollision(otherEntity);
 		});
 
-	setOnEndCollision([this](Entity<Actor> & otherEntity)
+	setOnEndCollision([this](Actor & otherEntity)
 	{
 			this->handleEndCollision(otherEntity);
 	});
@@ -100,12 +100,12 @@ sf::Vector2f& Actor::getVelocity()
 	return ComponentTransform->offset;
 }
 
-void Actor::handleCollision(Entity<Actor>& otherEntity)
+void Actor::handleCollision(Actor& otherEntity)
 {
 	//std::cout << _tag << ": BeginCollision with: " << otherEntity.tag() << std::endl;
 }
 
-void Actor::handleEndCollision(Entity<Actor>& otherEntity)
+void Actor::handleEndCollision(Actor& otherEntity)
 {
 	//std::cout << _tag << ": EndCollision with: " << otherEntity.tag() << std::endl;
 }

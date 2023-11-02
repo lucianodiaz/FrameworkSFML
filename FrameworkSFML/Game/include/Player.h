@@ -27,8 +27,8 @@ public:
 	virtual void processEvent() override;
 	virtual void setupInput() override;
 
-	virtual void handleCollision(Entity<Actor>& otherEntity) override;
+	virtual void handleCollision(Actor& otherEntity) override;
 
-	virtual void handleEndCollision(Entity<Actor>& otherEntity) override;
+	virtual void handleEndCollision(Actor& otherEntity) override;
 };
 

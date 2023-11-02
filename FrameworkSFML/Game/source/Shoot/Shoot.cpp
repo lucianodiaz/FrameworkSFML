@@ -55,15 +55,15 @@ void Shoot::update(sf::Time deltaTime)
 
 }
 
-void Shoot::handleCollision(Entity<Actor>& otherEntity)
+void Shoot::handleCollision(Actor& otherEntity)
 {
-	if (otherEntity.tag() != "Shoot" && otherEntity.tag() != _owner->tag())
+	if (otherEntity.tag() != "shoot" && otherEntity.tag() != _owner->tag())
 	{
 		destroy();
 	}
 	
 }
 
-void Shoot::handleEndCollision(Entity<Actor>& otherEntity)
+void Shoot::handleEndCollision(Actor& otherEntity)
 {
 }

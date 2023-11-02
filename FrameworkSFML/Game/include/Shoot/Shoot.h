@@ -24,12 +24,12 @@ public:
 	virtual void update(sf::Time deltaTime) override;
 	virtual void beginPlay() override;
 
-	virtual void handleCollision(Entity<Actor>& otherEntity) override;
+	virtual void handleCollision(Actor& otherEntity) override;
 
-	virtual void handleEndCollision(Entity<Actor>& otherEntity) override;
+	virtual void handleEndCollision(Actor& otherEntity) override;
 
 	CProjectile& getComponentProjectile() { return *ComponentProjectile; }
 
-	float velocity=500;
+	float velocity=800;
 
 };

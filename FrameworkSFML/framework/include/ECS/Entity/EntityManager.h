@@ -94,10 +94,14 @@ inline list<shared_ptr<T>> EntityManager<T>::getEntitiesWithComponent()
 
 	for (const auto& entity : _entities)
 	{
-		if ((entity->template hasComponent<COMPONENT>() && ...))
+		if (entity->isAlive())
 		{
-			entitiesWithComponent.push_back(entity);
+			if ((entity->template hasComponent<COMPONENT>() && ...))
+			{
+				entitiesWithComponent.push_back(entity);
+			}
 		}
+
 	}
 
 	return entitiesWithComponent;

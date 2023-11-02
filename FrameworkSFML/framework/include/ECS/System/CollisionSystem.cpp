@@ -110,7 +110,7 @@ void CollisionSystem::checkCollision(std::shared_ptr<CTransform> transform, std:
 
 	for (const auto& otherEntity : posibleCollisions)
 	{
-		if (otherEntity != nullptr && otherEntity != entity)
+		if (otherEntity != nullptr && otherEntity != entity && entity->isAlive())
 		{
 			auto otherTransform = otherEntity->ComponentTransform;
 			auto otherCollider = otherEntity->getComponent<CCollision>();
@@ -146,14 +146,16 @@ void CollisionSystem::checkCollision(std::shared_ptr<CTransform> transform, std:
 						transform->position.y += (entityBounds.top < otherBound.top) ? -ySeparation : ySeparation;
 				}
 
-				if (entity->onBeginCollision)
+				if (entity->onBeginCollision && otherEntity->isAlive())
 				{
 					entity->onBeginCollision(*otherEntity);
+					
 				}
 
-				if (otherEntity->onBeginCollision)
+				if (otherEntity->onBeginCollision && otherEntity->isAlive())
 				{
 					otherEntity->onBeginCollision(*entity);
+					
 				}
 
 				_currentCollision.insert(otherEntity);

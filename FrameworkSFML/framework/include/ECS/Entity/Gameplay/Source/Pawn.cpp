@@ -50,12 +50,12 @@ void Pawn::setupInput()
 {
 }
 
-void Pawn::handleCollision(Entity<Actor>& otherEntity)
+void Pawn::handleCollision(Actor& otherEntity)
 {
 	Actor::handleCollision(otherEntity);
 }
 
-void Pawn::handleEndCollision(Entity<Actor>& otherEntity)
+void Pawn::handleEndCollision(Actor& otherEntity)
 {
 	Actor::handleEndCollision(otherEntity);
 }
