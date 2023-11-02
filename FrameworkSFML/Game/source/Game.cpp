@@ -3,11 +3,14 @@
 #include <ECS/System/RotationSystem.h>
 #include <ECS/System/TransformSystem.h>
 #include <ECS/System/SystemRender.h>
+#include <Enemy/Meteors/Meteor.h>
+#include <Math/Random.h>
 
 Game::Game(int x, int y)
 {
 	world = World::getWorld();
 	world->CreateWindow(x, y, "SFML Framework");
+	cantAsteroids = 1;
 }
 
 void Game::run(int frame_per_seconds)
@@ -25,8 +28,13 @@ void Game::run(int frame_per_seconds)
 	world->addSystem<SystemRender>();
 
 	sf::FloatRect worldBounds(0,0,world->getWindow()->getRenderWindow().getSize().x, world->getWindow()->getRenderWindow().getSize().y);
-	int maxEntities=10;
+	int maxEntities=15;
 	world->addSystem<CollisionSystem>(worldBounds, maxEntities);
+
+	world->GetTimerManager().createTimer(10, 
+		[this]() {
+		createAsteroid();
+		},true);
 
 	while (world->getWindow()->isOpen())
 	{
@@ -113,5 +121,16 @@ void Game::createPlayer()
 	float y = world->getWindow()->getRenderWindow().getSize().y / 2.0f;
 
 	_player = world->getEntityManager()->spawnEntity<Player>("ship", Configuration::Textures::Ship, sf::Vector2f(x, y));
+}
 
+void Game::createAsteroid()
+{
+	std::cout << "Asteroids to create: " << cantAsteroids << std::endl;
+	for (int i = 0; i < cantAsteroids; i++)
+	{
+		auto xw = randomlib::random(0, world->getWindow()->getWindowCenterPos().x);
+		auto yw = randomlib::random(0, world->getWindow()->getWindowCenterPos().y);
+		auto m = world->getEntityManager()->spawnEntity<Meteor>("meteor", Configuration::Textures::Barrel, sf::Vector2f(xw, yw));
+	}
+	cantAsteroids++;
 }

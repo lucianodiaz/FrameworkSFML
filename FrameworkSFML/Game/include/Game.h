@@ -26,9 +26,13 @@ protected:
 	void processEvents();
 
 	void createPlayer();
+
+	void createAsteroid();
 private:
 	
 	std::shared_ptr<World> world;
 
 	std::shared_ptr<Player> _player;
+
+	int cantAsteroids;
 };
