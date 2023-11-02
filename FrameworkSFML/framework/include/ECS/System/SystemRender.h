@@ -9,8 +9,10 @@ class SystemRender : public BaseSystem
 public:
     SystemRender();
 
-    void update(sf::Time deltaTime) override;
+    virtual ~SystemRender(){};
+
+    virtual void update(sf::Time deltaTime) override;
 
 
-    void draw(sf::RenderWindow& window) override;
+    virtual void draw(sf::RenderWindow& window) override;
 };
