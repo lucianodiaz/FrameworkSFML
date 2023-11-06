@@ -1,5 +1,10 @@
 ﻿#include "ECS/Entity/EntityManager.h"
 #include <ECS/Entity/Gameplay/include/Actor.h>
+#include <ECS/System/CameraSystem.h>
+#include <ECS/System/CollisionSystem.h>
+#include <ECS/System/RotationSystem.h>
+#include <ECS/System/TransformSystem.h>
+#include <ECS/System/SystemRender.h>
 #include <SFML/Graphics.hpp>
 #include <Window/Window.h>
 #include <ECS/System/System.h>

@@ -10,6 +10,15 @@ World::World()
 void World::CreateWindow(int width, int height, string tittle)
 {
 	_window = std::make_unique<Window>(width, height, tittle);
+
+	addSystem<TransformSystem>();
+	addSystem<RotationSystem>();
+	addSystem<SystemRender>();
+	addSystem<CameraSystem>();
+
+	sf::FloatRect worldBounds(0, 0, getWindow()->getRenderWindow().getSize().x, getWindow()->getRenderWindow().getSize().y);
+	int maxEntities = 50;
+	addSystem<CollisionSystem>(worldBounds, maxEntities);
 }
 
 void World::update(sf::Time deltaTime)
