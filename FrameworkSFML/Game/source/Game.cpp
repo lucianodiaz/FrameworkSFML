@@ -5,6 +5,7 @@
 #include <ECS/System/SystemRender.h>
 #include <Enemy/Meteors/Meteor.h>
 #include <Math/Random.h>
+#include <ECS/System/CameraSystem.h>
 
 Game::Game(int x, int y)
 {
@@ -26,6 +27,7 @@ void Game::run(int frame_per_seconds)
 	world->addSystem<TransformSystem>();
 	world->addSystem<RotationSystem>();
 	world->addSystem<SystemRender>();
+	world->addSystem<CameraSystem>();
 
 	sf::FloatRect worldBounds(0,0,world->getWindow()->getRenderWindow().getSize().x, world->getWindow()->getRenderWindow().getSize().y);
 	int maxEntities=15;

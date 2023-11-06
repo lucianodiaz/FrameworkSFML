@@ -3,6 +3,7 @@
 #include <Input/ActionTarget.h>
 #include <ECS/Entity/Gameplay/include/Character.h>
 #include <ECS/Component/CRotation.h>
+#include <ECS/Component/CCamera.h>
 class Player : public Character
 {
 	bool isPressed = false;
@@ -19,6 +20,8 @@ public:
 	Player(const string& tag, const size_t id,sf::Vector2f pos);
 
 	std::shared_ptr<CRotation> ComponentRotation;
+
+	std::shared_ptr<CCamera> CameraComponent;
 
 	sf::Vector2f normalize(const sf::Vector2f& vector);
 

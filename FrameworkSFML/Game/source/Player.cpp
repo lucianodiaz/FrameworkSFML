@@ -2,6 +2,7 @@
 #include "World.h"
 #include <Shoot/Shoot.h>
 
+
 Player::~Player()
 {
 }
@@ -27,6 +28,9 @@ void Player::beginPlay()
 	_impulse = sf::Vector2f(0, 0);
 	ComponentRotation = addComponent<CRotation>(0);  // Dirección inicial: derecha, rotación inicial: 0 grados
 	_isMoving = false;
+
+	CameraComponent = addComponent<CCamera>(sf::Vector2f(ComponentTransform->position.x/2, ComponentTransform->position.y / 2),sf::Vector2f(getWorld()->getWindow()->getRenderWindow().getSize()));
+	CameraComponent->LagFactor = 0.5;
 	setupInput();
 }
 
@@ -80,12 +84,12 @@ void Player::setupInput()
 
 	bind(Configuration::PlayerInputs::Left, [this](const sf::Event&) {
 		// Rotar a la izquierda (sentido antihorario)
-		ComponentRotation->addRotation -= 1;
+		ComponentRotation->addRotation -= 1.5;
 		});
 
 	bind(Configuration::PlayerInputs::Right, [this](const sf::Event&) {
 		// Rotar a la derecha (sentido horario)
-		ComponentRotation->addRotation += 1;
+		ComponentRotation->addRotation += 1.5;
 		});
 
 	bind(Configuration::PlayerInputs::LeftClick, [this](const sf::Event&)
@@ -98,7 +102,6 @@ void Player::shoot()
 	if (_timeSinceLastSpawn > sf::seconds(0.2))
 	{
 		auto newPos = sf::Vector2f( ComponentTransform->position.x, ComponentTransform->position.y);
-		
 		float angleInRadians = (ComponentRotation->getRotation()) * 3.14159265 / 180; // Convierte el ángulo a radianes
 		sf::Vector2f direction(cos(angleInRadians), sin(angleInRadians));
 
