@@ -153,6 +153,7 @@
     <ClCompile Include="framework\include\ECS\Entity\Gameplay\Source\Actor.cpp" />
     <ClCompile Include="framework\include\ECS\Entity\Gameplay\Source\Character.cpp" />
     <ClCompile Include="framework\include\ECS\Entity\Gameplay\Source\Pawn.cpp" />
+    <ClCompile Include="framework\include\ECS\System\CameraSystem.cpp" />
     <ClCompile Include="framework\include\ECS\System\CollisionLogic\QuadTree.cpp" />
     <ClCompile Include="framework\include\ECS\System\CollisionSystem.cpp" />
     <ClCompile Include="framework\include\ECS\System\RotationSystem.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="Game\source\Shoot\Shoot.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="framework\include\ECS\Component\CCamera.h" />
     <ClInclude Include="framework\include\ECS\Component\CCollision.h" />
     <ClInclude Include="framework\include\ECS\Component\CDrawable.h" />
     <ClInclude Include="framework\include\ECS\Component\Component.h" />
@@ -183,6 +185,7 @@
     <ClInclude Include="framework\include\ECS\Entity\Gameplay\include\Actor.h" />
     <ClInclude Include="framework\include\ECS\Entity\Gameplay\include\Character.h" />
     <ClInclude Include="framework\include\ECS\Entity\Gameplay\include\Pawn.h" />
+    <ClInclude Include="framework\include\ECS\System\CameraSystem.h" />
     <ClInclude Include="framework\include\ECS\System\CollisionLogic\QuadTree.h" />
     <ClInclude Include="framework\include\ECS\System\CollisionLogic\QuadTreeNode.h" />
     <ClInclude Include="framework\include\ECS\System\CollisionSystem.h" />
