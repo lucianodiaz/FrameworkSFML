@@ -47,7 +47,6 @@ void Meteor::beginPlay()
 	sf::Vector2f direction = sf::Vector2f(dirX, dirY) ;
 
 	ComponentTransform->setVelocity(direction * randomlib::random(1.0f, 10.0f));
-	std::cout << "Rotation Speed: " << rotationSpeed << std::endl;
 }
 
 
