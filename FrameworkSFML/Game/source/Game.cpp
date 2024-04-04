@@ -20,7 +20,7 @@ void Game::run(int frame_per_seconds)
 
 	createPlayer();
 
-	world->GetTimerManager().createTimer(10, 
+	idTimerSpawnMeteors = world->GetTimerManager().createTimer(0.5, 
 		[this]() {
 		createAsteroid();
 		},true);
@@ -114,11 +114,17 @@ void Game::createPlayer()
 
 void Game::createAsteroid()
 {
-	std::cout << "Asteroids to create: " << cantAsteroids << std::endl;
+	if (world->getEntityManager()->getEntities("meteor").size() >= 50)
+	{
+		
+		world->GetTimerManager().removeTimer(idTimerSpawnMeteors);
+		return;
+	}
 	for (int i = 0; i < cantAsteroids; i++)
 	{
 		auto xw = randomlib::random(0, world->getWindow()->getWindowCenterPos().x);
 		auto yw = randomlib::random(0, world->getWindow()->getWindowCenterPos().y);
+
 		auto m = world->getEntityManager()->spawnEntity<Meteor>("meteor", Configuration::Textures::Barrel, sf::Vector2f(xw, yw));
 	}
 	cantAsteroids++;

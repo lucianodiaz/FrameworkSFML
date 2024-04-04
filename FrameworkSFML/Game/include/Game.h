@@ -29,7 +29,8 @@ protected:
 
 	void createAsteroid();
 private:
-	
+	int idTimerSpawnMeteors;
+
 	std::shared_ptr<World> world;
 
 	std::shared_ptr<Player> _player;
