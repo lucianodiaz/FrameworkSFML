@@ -1,6 +1,12 @@
 #include "TimerManager.h"
-#include <set>
 
+/**
+ * Create a Timer that work with seconds
+ * @duration ammount of time you set this timer
+ * @callback method that you call when this timer finished
+ * @loop true this timer called indefinitly
+ * @return a ID of this timer
+ */
 int TimerManager::createTimer(float duration, std::function<void()> callback, bool loop)
 {
     int timerID = nextTimerID++;
@@ -21,11 +27,11 @@ bool TimerManager::isTimerExpired(int timerID)
 
 void TimerManager::removeTimer(int timerID)
 {
-    timers.erase(timerID);
+    _timersToRemove.insert(timerID);
 }
 
 void TimerManager::update() {
-    std::set<int> timersToRemove;
+    //std::set<int> timersToRemove;
 
     for (auto it = timers.begin(); it != timers.end(); ++it) {
         int timerID = it->first;
@@ -47,11 +53,12 @@ void TimerManager::update() {
         TimerInfo& timerInfo = it->second;
 
         if (isTimerExpired(timerID) && !timerInfo.loop) {
-            timersToRemove.insert(timerID);
+            _timersToRemove.insert(timerID);
         }
     }
 
-    for (int timerID : timersToRemove) {
+    for (int timerID : _timersToRemove) {
         timers.erase(timerID);
     }
+    _timersToRemove.clear();
 }

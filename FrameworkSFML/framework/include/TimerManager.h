@@ -2,7 +2,7 @@
 #include <SFML/System.hpp>
 #include <map>
 #include <functional>
-
+#include <set>
 
 class TimerManager
 {
@@ -18,6 +18,7 @@ public:
 	void update();
 
 private:
+	std::set<int> _timersToRemove;
 
 	struct TimerInfo {
 		sf::Clock clock;
