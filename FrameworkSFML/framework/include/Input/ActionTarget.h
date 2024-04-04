@@ -35,6 +35,7 @@ inline ActionTarget<T>::ActionTarget(const ActionMap<T>& map) :
 template<typename T>
 inline bool ActionTarget<T>::processEvent(const sf::Event& event) const
 {
+	if (_eventsPoll.size() <= 0) return false;
 	bool res = false;
 	for (auto& pair : _eventsPoll)
 	{
@@ -51,6 +52,7 @@ inline bool ActionTarget<T>::processEvent(const sf::Event& event) const
 template<typename T>
 inline void ActionTarget<T>::processEvents() const
 {
+	if (_eventRealTime.size() <= 0) return;
 	for (auto& pair : _eventRealTime)
 	{
 		const Action& action = _actionMap.get(pair.first);
