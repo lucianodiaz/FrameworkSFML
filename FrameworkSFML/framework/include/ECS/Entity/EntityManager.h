@@ -45,6 +45,9 @@ inline void EntityManager<T>::update(sf::Time deltaTime)
 {
 	if (_entitiesToAdd.size() > 0)
 	{
+		for (auto& entity : _entitiesToAdd) {
+			_entityMap[entity->tag()].push_back(entity);
+		}
 		_entities.splice(_entities.end(), _entitiesToAdd);
 	}
 
