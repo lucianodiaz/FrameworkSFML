@@ -18,7 +18,7 @@ void Configuration::initialize()
 void Configuration::initTextures()
 {
 	textures.load(Textures::Barrel, "assets/Sprites/barrel.png");
-	textures.load(Textures::Default, "assets/Sprites/default.png");
+	textures.load(Textures::Default, "framework/assets/default.png");
 	textures.load(Textures::Human, "assets/Sprites/human.png");
 	textures.load(Textures::Ship, "assets/Sprites/ship.png");
 	textures.load(Textures::ShootPlayer, "assets/Sprites/player.png");

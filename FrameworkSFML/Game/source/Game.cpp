@@ -57,8 +57,8 @@ void Game::update(sf::Time deltaTime)
 	for (auto& entity : entities)
 	{
 		sf::Vector2f& pos = entity->ComponentTransform->position;
-		float xWorld = world->getWindow()->getRenderWindow().getSize().x;
-		float yWorld = world->getWindow()->getRenderWindow().getSize().y;
+		float xWorld = world->getWindow()->getRenderWindow().getSize().x *2;
+		float yWorld = world->getWindow()->getRenderWindow().getSize().y *2;
 		if (pos.x < 0)
 		{
 			pos.x = xWorld;
@@ -114,7 +114,7 @@ void Game::createPlayer()
 
 void Game::createAsteroid()
 {
-	if (world->getEntityManager()->getEntities("meteor").size() >= 50)
+	if (world->getEntityManager()->getEntities("meteor").size() >= 500)
 	{
 		
 		world->GetTimerManager().removeTimer(idTimerSpawnMeteors);
@@ -125,7 +125,7 @@ void Game::createAsteroid()
 		auto xw = randomlib::random(0, world->getWindow()->getWindowCenterPos().x);
 		auto yw = randomlib::random(0, world->getWindow()->getWindowCenterPos().y);
 
-		auto m = world->getEntityManager()->spawnEntity<Meteor>("meteor", Configuration::Textures::Barrel, sf::Vector2f(xw, yw));
+		auto m = world->getEntityManager()->spawnEntity<Meteor>("meteor", sf::Vector2f(xw, yw));
 	}
 	cantAsteroids++;
 }
