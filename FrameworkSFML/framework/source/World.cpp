@@ -17,7 +17,7 @@ void World::CreateWindow(int width, int height, string tittle)
 	addSystem<CameraSystem>();
 
 	sf::FloatRect worldBounds(0, 0, getWindow()->getRenderWindow().getSize().x, getWindow()->getRenderWindow().getSize().y);
-	int maxEntities = 15;
+	int maxEntities = 6;
 	addSystem<CollisionSystem>(worldBounds, maxEntities);
 }
 

@@ -3,7 +3,9 @@
 #include <ECS/Component/CTransform.h>
 #include <ECS/Component/CCollision.h>
 #include <unordered_set>
-#include "CollisionLogic/QuadTree.h"
+#include "QuadTree-1/QuadTree.h"
+#include "QuadTree/QuadTreeLogic.h"
+
 
 class CollisionSystem : public BaseSystem
 {
@@ -15,11 +17,14 @@ public:
 	void draw(sf::RenderWindow& window) override;
 	void update(sf::Time deltaTime) override;
 
+	
 
 private:
-	std::unordered_set<std::shared_ptr<Actor>> _currentCollision;
-	std::unique_ptr<QuadTree> quadTree;
-	void drawQuadTreeBounds(sf::RenderWindow& window, const std::shared_ptr<QuadTreeNode>& node);
 
-	void checkCollision(std::shared_ptr<CTransform>transform, std::shared_ptr<CCollision> collider, shared_ptr<Actor> entity);
+	unique_ptr<QuadTreeLogic> quadTree;
+
+	std::unordered_set<std::shared_ptr<Actor>> _currentCollision;
+
+	void performCollisionDetection(shared_ptr<QuadTreeNode> node);
+	void checkCollision(shared_ptr<Actor> entity, shared_ptr<Actor> otherEntity);
 };

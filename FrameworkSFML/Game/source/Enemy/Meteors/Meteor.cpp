@@ -30,7 +30,7 @@ void Meteor::beginPlay()
 {
 	Actor::beginPlay();
 	ComponentCollision = addComponent<CCollision>(ComponentDrawable->sprite.getGlobalBounds());
-	ComponentCollision->isBlocking = true;
+	//ComponentCollision->isBlocking = true;
 	rotationSpeed = randomlib::random(0.5f, 1.0f);
 
 	ComponentRotation->rotation = randomlib::random(0, 360);

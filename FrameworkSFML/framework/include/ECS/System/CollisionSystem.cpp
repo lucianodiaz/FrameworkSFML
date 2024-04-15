@@ -6,7 +6,7 @@ CollisionSystem::CollisionSystem()
 
 CollisionSystem::CollisionSystem(sf::FloatRect worldBounds, int maxEntitiesPerNode)
 {
-	quadTree = std::make_unique<QuadTree>(worldBounds, maxEntitiesPerNode);
+	quadTree = make_unique<QuadTreeLogic>(worldBounds, maxEntitiesPerNode);
 }
 
 void CollisionSystem::draw(sf::RenderWindow& window)
@@ -31,85 +31,59 @@ void CollisionSystem::draw(sf::RenderWindow& window)
 		}
 
 	}
-	drawQuadTreeBounds(window, quadTree->_root);
 }
 
 void CollisionSystem::update(sf::Time deltaTime)
 {
+
+	//Insert all colliders into the quad tree
 	auto entitiesWithColliders = _entityManager->getEntitiesWithComponent<CTransform, CCollision>();
-	quadTree->update();
 	for (const auto& entity : entitiesWithColliders)
 	{
-
-		auto transformComponent = entity->ComponentTransform;
-		auto collisionComponent = entity->getComponent<CCollision>();
 		quadTree->insert(entity);
-		checkCollision(transformComponent, collisionComponent, entity);
 	}
+
+	performCollisionDetection(quadTree->root());
+
 	quadTree->clear();
 }
 
-void CollisionSystem::drawQuadTreeBounds(sf::RenderWindow& window, const std::shared_ptr<QuadTreeNode>& node)
+void CollisionSystem::performCollisionDetection(shared_ptr<QuadTreeNode> node)
 {
-	if (node == nullptr)
-		return;
+	if (!node) return;
 
-	sf::RectangleShape quadBounds;
-	quadBounds.setPosition(sf::Vector2f(node->bounds.left, node->bounds.top));
-	quadBounds.setSize(sf::Vector2f(node->bounds.width, node->bounds.height));
-	quadBounds.setOutlineColor(sf::Color::Blue);
-	quadBounds.setOutlineThickness(1.0f);
-	quadBounds.setFillColor(sf::Color::Transparent);
+	auto entities = node->entities;
 
-	window.draw(quadBounds);
-
-	for (const auto& child : node->children)
+	//cout << "Quantity of entities to check collisions: " << node->entities.size() << endl;
+	for (size_t i = 0; i < entities.size(); ++i)
 	{
-		if (child != nullptr)
+		for (size_t j = i + 1; j < entities.size(); ++j)
 		{
-			drawQuadTreeBounds(window, child);
-
-			// Draw lines to connect the parent node to its children
-			sf::Vector2f parentCenter(node->bounds.left + node->bounds.width / 2.0f,
-				node->bounds.top + node->bounds.height / 2.0f);
-			sf::Vector2f childCenter(child->bounds.left + child->bounds.width / 2.0f,
-				child->bounds.top + child->bounds.height / 2.0f);
-
-			sf::Vertex line[] =
-			{
-				sf::Vertex(parentCenter, sf::Color::Blue),
-				sf::Vertex(childCenter, sf::Color::Blue)
-			};
-
-			window.draw(line, 2, sf::Lines);
+			checkCollision(entities[i], entities[j]);
 		}
+	}
+
+	// Recursively perform collision detection on child nodes
+	for (const auto& child : node->nodes)
+	{
+		performCollisionDetection(child);
 	}
 }
 
-void CollisionSystem::checkCollision(std::shared_ptr<CTransform> transform, std::shared_ptr<CCollision> collider, shared_ptr<Actor> entity)
+void CollisionSystem::checkCollision(shared_ptr<Actor> entity, shared_ptr<Actor> otherEntity)
 {
+	auto collider = entity->getComponent<CCollision>();
+	auto transform = entity->ComponentTransform;
+
 	sf::FloatRect entityBounds = collider->bounds;
 
 	entityBounds.left += transform->position.x;
 	entityBounds.top += transform->position.y;
 
-	//auto entitiesWithColliders = _entityManager->getEntitiesWithComponent<CTransform, CCollision>();
-
 	std::unordered_set<std::shared_ptr<Actor>> previousCollision = _currentCollision;
 
 	_currentCollision.clear();
 
-	std::vector<std::shared_ptr<Actor>> posibleCollisions;
-	quadTree->retrieve(posibleCollisions, entity);
-
-	/*if (entity->tag() == "player")
-	{
-		std::cout << "Posible collisions: " << posibleCollisions.size() << std::endl;
-	}*/
-
-
-	for (const auto& otherEntity : posibleCollisions)
-	{
 		if (otherEntity != nullptr && otherEntity != entity && entity->isAlive())
 		{
 			auto otherTransform = otherEntity->ComponentTransform;
@@ -120,7 +94,6 @@ void CollisionSystem::checkCollision(std::shared_ptr<CTransform> transform, std:
 			otherBound.left += otherTransform->position.x;
 			otherBound.top += otherTransform->position.y;
 
-			quadTree->update();
  			if (entityBounds.intersects(otherBound))
 			{
 				if (otherCollider->isBlocking)
@@ -162,7 +135,7 @@ void CollisionSystem::checkCollision(std::shared_ptr<CTransform> transform, std:
 				_currentCollision.insert(entity);
 			}
 		}
-	}
+
 
 	//End Collision
 	for (const auto& prevEntity : previousCollision)
