@@ -3,7 +3,6 @@
 #include <ECS/Component/CTransform.h>
 #include <ECS/Component/CCollision.h>
 #include <unordered_set>
-#include "QuadTree-1/QuadTree.h"
 #include "QuadTree/QuadTreeLogic.h"
 
 
@@ -21,7 +20,7 @@ public:
 
 private:
 
-	unique_ptr<QuadTreeLogic> quadTree;
+	std::unique_ptr<QuadTreeLogic> quadTree;
 
 	std::unordered_set<std::shared_ptr<Actor>> _currentCollision;
 

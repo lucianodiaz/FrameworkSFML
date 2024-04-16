@@ -6,7 +6,7 @@ CollisionSystem::CollisionSystem()
 
 CollisionSystem::CollisionSystem(sf::FloatRect worldBounds, int maxEntitiesPerNode)
 {
-	quadTree = make_unique<QuadTreeLogic>(worldBounds, maxEntitiesPerNode);
+	quadTree = std::make_unique<QuadTreeLogic>(worldBounds, maxEntitiesPerNode);
 }
 
 void CollisionSystem::draw(sf::RenderWindow& window)
