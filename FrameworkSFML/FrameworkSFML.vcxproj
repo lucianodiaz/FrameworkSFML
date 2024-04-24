@@ -117,14 +117,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Dev\SFML-2.5.1\include;$(ProjectDir)framework\include;$(ProjectDir)Game\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\loco_\Documents\SFML-2.6.1\include;$(ProjectDir)framework\include;$(ProjectDir)Game\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Dev\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\loco_\Documents\SFML-2.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -154,8 +154,8 @@
     <ClCompile Include="framework\include\ECS\Entity\Gameplay\Source\Character.cpp" />
     <ClCompile Include="framework\include\ECS\Entity\Gameplay\Source\Pawn.cpp" />
     <ClCompile Include="framework\include\ECS\System\CameraSystem.cpp" />
-    <ClCompile Include="framework\include\ECS\System\CollisionLogic\QuadTree.cpp" />
     <ClCompile Include="framework\include\ECS\System\CollisionSystem.cpp" />
+    <ClCompile Include="framework\include\ECS\System\QuadTree\QuadTreeLogic.cpp" />
     <ClCompile Include="framework\include\ECS\System\RotationSystem.cpp" />
     <ClCompile Include="framework\include\ECS\System\SystemRender.cpp" />
     <ClCompile Include="framework\include\ECS\System\SystemRender.h" />
@@ -186,9 +186,9 @@
     <ClInclude Include="framework\include\ECS\Entity\Gameplay\include\Character.h" />
     <ClInclude Include="framework\include\ECS\Entity\Gameplay\include\Pawn.h" />
     <ClInclude Include="framework\include\ECS\System\CameraSystem.h" />
-    <ClInclude Include="framework\include\ECS\System\CollisionLogic\QuadTree.h" />
-    <ClInclude Include="framework\include\ECS\System\CollisionLogic\QuadTreeNode.h" />
     <ClInclude Include="framework\include\ECS\System\CollisionSystem.h" />
+    <ClInclude Include="framework\include\ECS\System\QuadTree\QuadTreeLogic.h" />
+    <ClInclude Include="framework\include\ECS\System\QuadTree\QuadTreeNode.h" />
     <ClInclude Include="framework\include\ECS\System\RotationSystem.h" />
     <ClInclude Include="framework\include\ECS\System\System.h" />
     <ClInclude Include="framework\include\ECS\System\TransformSystem.h" />
