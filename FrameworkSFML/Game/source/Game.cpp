@@ -20,7 +20,7 @@ void Game::run(int frame_per_seconds)
 
 	createPlayer();
 
-	idTimerSpawnMeteors = world->GetTimerManager().createTimer(0.5, 
+	idTimerSpawnMeteors = world->GetTimerManager().createTimer(10, 
 		[this]() {
 		createAsteroid();
 		},true);
