@@ -9,7 +9,7 @@
 #include <Window/Window.h>
 #include <ECS/System/System.h>
 #include <TimerManager.h>
-
+#include <SFML/Graphics/View.hpp>
 
 class World
 {
@@ -23,6 +23,9 @@ class World
     std::vector<std::shared_ptr<BaseSystem>> _systems;
 
     TimerManager timerManager;
+
+    sf::View _camera;
+
 public:
 
     static std::shared_ptr<World> getWorld()
@@ -30,6 +33,8 @@ public:
         static std::shared_ptr<World> instance = std::shared_ptr<World>(new World());
         return instance;
     }
+
+    void setCamera(sf::View camera);
 
     void CreateWindow(int width, int height, string tittle);
 

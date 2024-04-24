@@ -7,6 +7,10 @@ World::World()
 	randomlib::rand_init();
 }
 
+void World::setCamera(sf::View camera)
+{
+}
+
 void World::CreateWindow(int width, int height, string tittle)
 {
 	_window = std::make_unique<Window>(width, height, tittle);
@@ -19,6 +23,11 @@ void World::CreateWindow(int width, int height, string tittle)
 	sf::FloatRect worldBounds(0, 0, getWindow()->getRenderWindow().getSize().x, getWindow()->getRenderWindow().getSize().y);
 	int maxEntities = 6;
 	addSystem<CollisionSystem>(worldBounds, maxEntities);
+
+	//setCamera by default
+
+	sf::View v(worldBounds);
+	_camera = v;
 }
 
 void World::update(sf::Time deltaTime)
