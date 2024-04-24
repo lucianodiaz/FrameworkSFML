@@ -59,7 +59,7 @@ inline void EntityManager<T>::update(sf::Time deltaTime)
 
 	for (auto e : _entities)
 	{
-		if (e->isAlive())
+		if (e->isAlive() && !e->isHide())
 		{
 			e->update(deltaTime);
 		}

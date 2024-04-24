@@ -32,7 +32,7 @@ template<typename ENTITY>
 class Entity : public EntityBase
 {
 protected:
-
+    bool _hide = false;
     template<typename> friend class EntityManager;
     Entity(const string& tag, const size_t id) : EntityBase(tag,id)
     {
@@ -52,6 +52,7 @@ public:
 
     virtual ~Entity(){};
     void destroy() { _alive = false; };
+    bool isHide() const { return _hide; }
     bool isAlive() const { return _alive; }
     const string& tag() const { return _tag; }
     const size_t id() const { return _id; }
