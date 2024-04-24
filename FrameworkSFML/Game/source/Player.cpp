@@ -29,8 +29,10 @@ void Player::beginPlay()
 	ComponentRotation = addComponent<CRotation>(0);  // Dirección inicial: derecha, rotación inicial: 0 grados
 	_isMoving = false;
 
-	CameraComponent = addComponent<CCamera>(sf::Vector2f(ComponentTransform->position.x/2, ComponentTransform->position.y / 2),sf::Vector2f(getWorld()->getWindow()->getRenderWindow().getSize()));
+	CameraComponent = addComponent<CCamera>(sf::Vector2f(ComponentTransform->position.x / 2, ComponentTransform->position.y / 2), sf::Vector2f(getWorld()->getWindow()->getRenderWindow().getSize()));
 	CameraComponent->LagFactor = 0.1;
+
+	getWorld()->setCamera(CameraComponent->Camera);
 	setupInput();
 }
 
